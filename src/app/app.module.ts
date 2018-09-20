@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { SettingsService } from './services/settings.service';
+import { SettingsService } from './services/service.index';
+import { ServiceModule } from './services/service.module';
 
 
 
@@ -30,7 +31,7 @@ import { SettingsService } from './services/settings.service';
     PagesModule,
     FormsModule
   ],
-  providers: [SettingsService],
+  providers: [ServiceModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

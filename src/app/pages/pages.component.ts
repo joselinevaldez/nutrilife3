@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 declare function init_plugins();
+declare function calendario();
+declare function moment();
+declare function fullcal();
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -11,6 +14,11 @@ export class PagesComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
+    moment();
+    fullcal();
+    calendario();
+    
+    
   }
 
 }

@@ -12,13 +12,13 @@ export class Graficas1Component implements OnInit {
     'grafico1': {
       'labels': ['Con Frijoles', 'Con Natilla', 'Con tocino'],
       'data':  [24, 30, 46],
-      'type': 'doughnut',
+      'type': 'barChartType',
       'leyenda': 'El pan se come con'
     },
     'grafico2': {
       'labels': ['Hombres', 'Mujeres'],
       'data':  [4500, 6000],
-      'type': 'doughnut',
+      'type': 'barChartType',
       'leyenda': 'Entrevistados'
     },
     'grafico3': {
