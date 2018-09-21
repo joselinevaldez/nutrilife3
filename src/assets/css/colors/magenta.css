@@ -110,3 +110,9 @@ File: scss
   .sidebar-nav > ul > li > a i {
     color: #a6b7bf; }
   
+    .btn-thema{
+      background-color: #620447 !important;
+    }
+    .btn-thema:hover{
+      background-color: #a10976 !important;
+    }

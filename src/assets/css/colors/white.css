@@ -18,6 +18,12 @@ File: scss
 /*******************
 /*Top bar
 *******************/
+.btn-thema{
+  background-color: #736944 !important;
+}
+.btn-thema:hover{
+  background-color: #9e905d!important;
+}
 .topbar {
     background: #FAEAB3; }
     .topbar .navbar-header {

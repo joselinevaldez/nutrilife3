@@ -88,6 +88,12 @@ a.link:hover, a.link:focus {
 /*******************
 /*Buttons
 *******************/
+.btn-thema{
+  background-color: #1e88e5 !important;
+}
+.btn-thema:hover{
+  background-color: #56b0ff !important;
+}
 .btn-themecolor,
 .btn-themecolor.disabled {
   background: #1e88e5;

@@ -1029,7 +1029,7 @@ File: scss
 .fix-header .right-side-panel {
   top: 70px;
   height: calc(100% - 70px); }
- 
+
 .topbar {
   position: relative;
   z-index: 50; }
@@ -1038,6 +1038,7 @@ File: scss
   .topbar .top-navbar {
     min-height: 70px;
     padding: 0px; }
+    
     .topbar .top-navbar .dropdown-toggle::after {
       display: none; }
     .topbar .top-navbar .navbar-header {
@@ -1423,7 +1424,11 @@ ul#themecolors {
     display: inline-block; }
     ul#themecolors li:first-child {
       display: block; }
+    ul#themecolors li a:hover{
+        border: solid rgb(219, 215, 215);
+    }
     ul#themecolors li a {
+      border: solid transparent;
       width: 130px;
       height: 130px;
       display: inline-block;
@@ -1495,6 +1500,7 @@ ul#themecolors {
   background: -webkit-gradient(linear, left top, right top, from(#263238), color-stop(23%, #263238), color-stop(23%, #99abb4), color-stop(99%, #99abb4));
   background: -o-linear-gradient(left, #263238 0%, #263238 23%, #99abb4 23%, #99abb4 99%);
   background: linear-gradient(to right, #263238 0%, #263238 23%, #99abb4 23%, #99abb4 99%); }
+  
 
 .green-dark-theme {
   background: #263238;

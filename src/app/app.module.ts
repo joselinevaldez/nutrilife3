@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { SettingsService } from './services/service.index';
+import { SettingsService, SidebarService } from './services/service.index';
 import { ServiceModule } from './services/service.module';
 
 
@@ -29,9 +29,10 @@ import { ServiceModule } from './services/service.module';
     BrowserModule,
     APP_ROUTES,
     PagesModule,
-    FormsModule
+    FormsModule,
+    ServiceModule
   ],
-  providers: [ServiceModule],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

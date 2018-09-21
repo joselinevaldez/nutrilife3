@@ -18,17 +18,23 @@ File: scss
 /*******************
 /*Top bar
 *******************/
+.btn-thema{
+  background-color: #1976d2 !important;
+}
+.btn-thema:hover{
+  background-color: #56b0ff !important;
+}
 .topbar {
   background: #1976d2; }
   .topbar .navbar-header {
     background: #ffffff; }
   .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
     display: none;
-    color: black}
+    color: #a6b7bf;}
   .topbar .navbar-light .navbar-nav .nav-item > a.nav-link {
     color: #ffffff !important; }
     .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover, .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:focus {
-      color: black }
+      color: #a6b7bf; }
 
 /*******************
 /*General Elements
@@ -106,11 +112,11 @@ a.link:hover, a.link:focus {
     color: #1976d2;
     }
 .breadcrumb-item{
-  color: black !important;
+  color: #a6b7bf !important;
 }
 
 .sidebar-nav > ul > li > a  {
-  color: black; }
+  color: #a6b7bf; }
   .sidebar-nav > ul > li > a i  {
-    color: black; }
+    color: #a6b7bf; }
 

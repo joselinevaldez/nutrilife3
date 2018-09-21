@@ -13,12 +13,12 @@ export class SettingsService {
    }
   constructor(@Inject (DOCUMENT) private _document) { 
     this.cargarAjustes();
-    console.log("cargando ajustes");
+   // console.log("cargando ajustes");
   }
 
   guardarAjustes(){
     localStorage.setItem('ajustes',JSON.stringify(this.ajustes));
-    console.log("guardado");
+    //console.log("guardado");
   }
   cargarAjustes(){
     if(localStorage.getItem('ajustes')){
