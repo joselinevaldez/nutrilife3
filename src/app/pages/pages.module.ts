@@ -27,6 +27,7 @@ import { AlimentosComponent } from './alimentos/alimentos.component';
 import { PlatillosComponent } from './platillos/platillos.component';
 import { PlanesComponent } from './planes/planes.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         AlimentosComponent,
         PlatillosComponent,
         PlanesComponent,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        PromesasComponent
     ],
     exports: [
         DashboardComponent,

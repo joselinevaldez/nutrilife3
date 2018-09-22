@@ -11,6 +11,7 @@ import { AlimentosComponent } from './alimentos/alimentos.component';
 import { PlanesComponent } from './planes/planes.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
 
 
 
@@ -22,13 +23,14 @@ const pagesRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'progress', component: ProgressComponent },
             { path: 'graficas1', component: Graficas1Component },
-            { path: 'pacientes', component: PacientesComponent },
-            { path: 'home', component: HomeComponent },
-            { path: 'citas', component: CitasComponent },
-            { path: 'alimentos', component: AlimentosComponent },
-            { path: 'planes', component: PlanesComponent },
-            { path: 'platillos', component: PlatillosComponent },
-            { path: 'configuracion', component: AccountSettingsComponent },
+            { path: 'pacientes', component: PacientesComponent , data:{pagina:'Pacientes',titulo :'Pacientes'}},
+            { path: 'home', component: HomeComponent, data:{pagina:'Nutrilife',titulo :'Inicio'}},
+            { path: 'citas', component: CitasComponent, data:{pagina:'Citas',titulo :'Citas'}},
+            { path: 'alimentos', component: AlimentosComponent, data:{pagina:'Alimentos',titulo :'Alimentos'} },
+            { path: 'dietas', component: PlanesComponent, data:{pagina:'Dietas',titulo :'Dietas'} },
+            { path: 'platillos', component: PlatillosComponent, data:{pagina:'Platillos',titulo :'Platillos'} },
+            { path: 'configuracion', component: AccountSettingsComponent, data:{pagina:'Usuario',titulo :'Configuracion'} },
+            { path: 'promesas', component: PromesasComponent },
             { path: '', redirectTo: '/home', pathMatch: 'full' }
         ]
     }

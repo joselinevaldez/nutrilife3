@@ -55,8 +55,8 @@ export class SidebarService {
       titulo: 'Dietas',
       icono: 'mdi mdi-food-variant',
       submenu: [
-        { titulo: 'Crear Dieta',icono: 'mdi mdi-pencil-box', url: '/planes' },
-        { titulo : 'Lista de Dietas', icono: 'mdi mdi-view-list',url: '/planes' }
+        { titulo: 'Crear Dieta',icono: 'mdi mdi-pencil-box', url: '/dietas' },
+        { titulo : 'Lista de Dietas', icono: 'mdi mdi-view-list',url: '/dietas' }
        
       ]
     
