@@ -10,6 +10,7 @@ export class PacientesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  
   }
 
 }

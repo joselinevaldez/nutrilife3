@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-declare function calendario();
-declare function moment();
-declare function fullcal();
+
+
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
@@ -9,12 +8,15 @@ declare function fullcal();
 })
 export class CitasComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit() {
-     moment();
-     fullcal();
-    calendario();
+   
+   
+     
+     
    
    
 

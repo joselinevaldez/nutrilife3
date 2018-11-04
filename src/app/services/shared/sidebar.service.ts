@@ -15,10 +15,12 @@ export class SidebarService {
       titulo: 'Pacientes',
       icono: 'mdi mdi-account',
       submenu: [
-        { titulo: 'Nuevo Paciente',icono: 'mdi mdi-account-plus', url: '/pacientes' },
-        { titulo : 'Expedientes', icono: 'mdi mdi-folder-account',url: '/pacientes' },
-        { titulo : 'Consultas', icono: 'mdi mdi-view-list',url: '/pacientes' },
-        { titulo : 'Progresos', icono: 'mdi mdi-chart-bar',url: '/pacientes' }
+        { titulo: 'Nuevo Paciente',icono: 'mdi mdi-account-plus', url: '/addpaciente' },
+        { titulo : 'Expedientes', icono: 'mdi mdi-folder-account',url: '/expedientes' },
+        { titulo : 'Consultas', icono: 'mdi mdi-view-list',url: '/consultas' },
+        { titulo : 'Progresos', icono: 'mdi mdi-chart-bar',url: '/expedientes' },
+        { titulo : 'Linea Fotografica', icono: 'mdi mdi-camera-burst',url: '/expedientes' }
+
       ]
     },
     {

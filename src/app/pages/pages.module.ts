@@ -28,6 +28,10 @@ import { PlatillosComponent } from './platillos/platillos.component';
 import { PlanesComponent } from './planes/planes.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { AddpacientesComponent } from './addpacientes/addpacientes.component';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { Perfil2Component } from './perfil2/perfil2.component';
 
 @NgModule({
     declarations: [
@@ -44,7 +48,11 @@ import { PromesasComponent } from './promesas/promesas.component';
         PlatillosComponent,
         PlanesComponent,
         AccountSettingsComponent,
-        PromesasComponent
+        PromesasComponent,
+        PerfilComponent,
+        AddpacientesComponent,
+        ConsultasComponent,
+        Perfil2Component
     ],
     exports: [
         DashboardComponent,
