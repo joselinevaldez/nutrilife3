@@ -5,3 +5,16 @@
 .pointer{
     cursor:pointer;
 }
+#botonsito{
+    margin-left: 2px;
+}
+#tablaP{
+    overflow:auto;
+    height: 250px;
+    border: 0.5px solid rgb(159, 163, 163);
+    
+    
+}
+#derecha{
+    text-align: right;
+}

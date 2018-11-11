@@ -14,12 +14,16 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { SettingsService, SidebarService } from './services/service.index';
 import { ServiceModule } from './services/service.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,12 @@ import { ServiceModule } from './services/service.module';
     PagesModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceModule
+    ServiceModule,
+    NgbModule,
+    CommonModule
+    
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

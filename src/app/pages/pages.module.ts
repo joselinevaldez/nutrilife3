@@ -4,9 +4,9 @@ import { PAGES_ROUTES } from './pages.routes';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
@@ -32,6 +32,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { AddpacientesComponent } from './addpacientes/addpacientes.component';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { Perfil2Component } from './perfil2/perfil2.component';
+import { CommonModule } from '@angular/common';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -63,7 +65,12 @@ import { Perfil2Component } from './perfil2/perfil2.component';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        NgbModule,
+        CommonModule,
+        PipesModule,
+        ReactiveFormsModule,
+        
     ]
 })
 export class PagesModule { }

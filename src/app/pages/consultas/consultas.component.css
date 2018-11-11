@@ -1,0 +1,27 @@
+#icono{
+    font-size: 48px;
+}
+#boton:hover{
+    
+    border-color: gray;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.10);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.10);
+
+}
+#icono{
+    font-size: 40px;
+    color: cadetblue;
+}
+#boton{
+    max-height: 150px;
+    border-radius: 20px;
+    height: 120px;
+    border-color:black;
+    border-style: solid;
+    border: 1px solid rgb(176, 213, 214);
+
+}

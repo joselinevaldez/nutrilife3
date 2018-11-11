@@ -77,6 +77,7 @@ crearUsuario(usuario: Usuario){
               .map( (resp: any) => {
 
                 swal('Usuario creado', usuario.email, 'success' );
+                console.log(resp.usuario._id);
                 return resp.usuario;
               });
   }

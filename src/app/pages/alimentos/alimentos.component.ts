@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class AlimentosComponent implements OnInit {
-
+  
+   
   constructor() { }
 
   ngOnInit() {
+    
+   
+   
+    
+   
   }
 
 }
