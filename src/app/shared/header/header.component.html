@@ -116,14 +116,14 @@
                                     <div class="u-img"><img [src]="usuario.img | imagen " alt="user"></div>
                                     <div class="u-text">
                                         <h4>{{ usuario.nombre }}</h4>
-                                        <p class="text-muted">{{ usuario.email }}</p><a routerLink="/perfil" class="btn btn-thema">View Profile</a></div>
+                                        <p class="text-muted">{{ usuario.email }}</p><a routerLink="/perfil" class="btn btn-thema">Ver Perfil</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a   routerLinkActive="active" routerLink="/perfil"><i class="ti-user"></i> Mi Perfil</a></li>
-                            <li><a routerLinkActive="active" routerLink="/configuracion"><i class="ti-settings"></i> Configuracion</a></li>
+                            <li><a routerLinkActive="active" routerLink="/configuracion"><i class="ti-settings"></i> Configuración</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
+                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </li>

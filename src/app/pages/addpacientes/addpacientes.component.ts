@@ -28,13 +28,26 @@ export class AddpacientesComponent implements OnInit {
   }
   ngOnInit() {
     this.pacienteForm=new FormGroup({
+      nombre:new FormControl(null, [Validators.required]),
+      app:new FormControl(null, [Validators.required]),
+      apm:new FormControl(null),
+      estadocivil:new FormControl(null, [Validators.required]),
+      religion:new FormControl(null),
+      direccion:new FormControl(null, [Validators.required]),
+      fechanacimiento:new FormControl(),
+      edad:new FormControl(null),
+      motivo:new FormControl(null),
+      medio:new FormControl(null),
+      quienrecomendo:new FormControl(null),
+      sexo:new FormControl(),
+      telefono:new FormControl(null,Validators.required),
       correo:new FormControl(null, [Validators.required,Validators.email]),
       password:new FormControl(null, Validators.required),
       password2:new FormControl(null, Validators.required),
       },   { validators: this.sonIguales( 'password', 'password2' )  } );
    
   }
-  registrarUsuario(){
+  registrarPaciente(){
   
   }
 }

@@ -16,6 +16,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { AddpacientesComponent } from './addpacientes/addpacientes.component';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { ListaAlimentosComponent } from './lista-alimentos/lista-alimentos.component';
+import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.component';
 
 
 
@@ -34,12 +36,15 @@ const pagesRoutes: Routes = [
          
             { path: 'home', component: HomeComponent, data:{pagina:'Nutrilife',titulo :'Inicio'}},
             { path: 'citas', component: CitasComponent, data:{pagina:'Citas',titulo :'Citas'}},
-            { path: 'alimentos', component: AlimentosComponent, data:{pagina:'Alimentos',titulo :'Alimentos'} },
+            { path: 'alimentos', component: AlimentosComponent, data:{pagina:'Alimentos',titulo :'Nuevo Alimento'} },
+            { path: 'alimentoslista', component: ListaAlimentosComponent, data:{pagina:'Alimentos',titulo :'Lista de Alimentos'} },
+         
             { path: 'dietas', component: PlanesComponent, data:{pagina:'Dietas',titulo :'Dietas'} },
             { path: 'addpaciente', component: AddpacientesComponent, data:{pagina:'Pacientes',titulo :'Nuevo Paciente'} },
             { path: 'consultas', component: ConsultasComponent, data:{pagina:'Pacientes',titulo :'Consultas'} },
-         
-            { path: 'platillos', component: PlatillosComponent, data:{pagina:'Platillos',titulo :'Platillos'} },
+            { path: 'platilloslista', component: ListaPlatillosComponent, data:{pagina:'Platillos',titulo :'Lista de Platillos'} },
+          
+            { path: 'platillos', component: PlatillosComponent, data:{pagina:'Platillos',titulo :'Crear Platillo'} },
             { path: 'configuracion', component: AccountSettingsComponent, data:{pagina:'Usuario',titulo :'Configuracion'} },
             { path: 'promesas', component: PromesasComponent },
             { path: '', redirectTo: '/home', pathMatch: 'full' }

@@ -27,7 +27,13 @@ posicion:string;
     this.existe=false;
   }
   agregarAlimento(){
-    
+    //INICIALIZACION DE VARIABLES
+    this.existe=false;
+    this.contador=0;
+    this.total=0;
+    this.acumulador=0;
+    this.cantidad=0;
+    ///
     this.select = document.getElementById("alimento"); //El <select>
          //El valor seleccionado
     

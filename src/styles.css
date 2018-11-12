@@ -15,6 +15,27 @@
     
     
 }
+#colorcabecera{
+  background-color: rgb(169, 189, 224);
+}
+#colorfila{
+    background-color: rgb(210, 221, 241);
+  }
+#tablaplan{
+    overflow-x: scroll;
+}
 #derecha{
     text-align: right;
+}
+.w150{
+    width: 150px;
+}
+#file-input2 {
+    visibility: hidden;
+    width: 0;
+    position: relative;
+    background-color: #ce5858 !important;
+  }
+#targeta{
+    height: 380px;
 }

@@ -34,6 +34,8 @@ import { ConsultasComponent } from './consultas/consultas.component';
 import { Perfil2Component } from './perfil2/perfil2.component';
 import { CommonModule } from '@angular/common';
 import { PipesModule } from '../pipes/pipes.module';
+import { ListaAlimentosComponent } from './lista-alimentos/lista-alimentos.component';
+import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +56,9 @@ import { PipesModule } from '../pipes/pipes.module';
         PerfilComponent,
         AddpacientesComponent,
         ConsultasComponent,
-        Perfil2Component
+        Perfil2Component,
+        ListaAlimentosComponent,
+        ListaPlatillosComponent
     ],
     exports: [
         DashboardComponent,

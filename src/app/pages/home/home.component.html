@@ -46,13 +46,22 @@
             </section>
            <h3 align="center">Citas del dia</h3>
            <hr>
-           <div class="table-responsive">
+           <div class="alert alert-success">
+                <strong>Muy bien!</strong> El dia de hoy has atendido: citas.
+            </div>
+           <div class="alert alert-warning">
+                <strong>Atencion !</strong> El dia de hoy tienes: citas pendientes.
+            </div>
+            <div class="alert alert-danger">
+                    <strong></strong> El dia de hoy cancelaste: citas .
+                </div>
+         <!--  <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
                             <th hidden="hidden">id</th>
-                            <th>Expediente</th>
                             <th>Nombre del paciente</th>
+                            <th>Telefono</th>
                             <th>Fecha y hora</th>
                             <th>Estado de la cita</th>
                             <th></th>
@@ -61,29 +70,31 @@
                     <tbody>
                         <tr>
                             <td hidden="hidden"></td>
-                            <td>JVG-0214</td>
+                            
                             <td>Joseline Valdez Gastelum</td>
+                            <td>6682414321</td>
                             <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
                             <td>
                                 <div class="label label-table label-warning">Pendiente</div>
                             </td>
                             <td>
-                                <button id="botonsito"  title="Preciona para cancelar la cita" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
-                                <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-xs"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
+                                <button id="botonsito"  title="Preciona para cancelar la cita" class="btn btn-danger btn-circle"><i class="fa fa-remove"></i></button>
+                                <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-circle"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
                                                                  
                             </td>
                         </tr>
                         <tr>
                                 <td hidden="hidden"></td>
-                                <td>JVG-0214</td>
+                                
                                 <td>Joseline Valdez Gastelum</td>
+                                <td>6682414321</td>
                                 <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
                                 <td>
                                     <div class="label label-table label-danger">Cancelada</div>
                                 </td>
                                 <td>
-                                    <button id="botonsito"  title="Preciona para reactivar la cita" class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                    <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-xs"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
+                                    <button id="botonsito"  title="Preciona para reactivar la cita" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                    <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-circle"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
                                                                      
                                 </td>
                             </tr>
@@ -102,7 +113,7 @@
                         
                     </tbody>
                 </table>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>

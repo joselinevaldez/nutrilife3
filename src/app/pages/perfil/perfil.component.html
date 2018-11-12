@@ -1,40 +1,42 @@
 <div class="row">
         <div class="col-lg-7">
-            <div class="card">
+            <div id="targeta" class="card">
                 <div class="card-body">
                     <h4 class="card-title">Perfil de usuario</h4>
                     
-                    <form class="form p-t-20">
+                    <form ngNativeValidate #f="ngForm" (ngSubmit)="guardarUsuario (f.value)"class="form p-t-20">
                         <div class="form-group">
                             <label for="exampleInputuname">Nombre </label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="ti-user"></i></div>
-                                <input class="form-control" id="exampleInputuname" type="text" placeholder="Username">
+                                <input [(ngModel)]="usuario.nombre" name="nombre" class="form-control" type="text" placeholder="nombre" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="ti-email"></i></div>
-                                <input class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email">
+                                <input [(ngModel)]="usuario.email" name="email" disabled class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email">
                             </div>
                         </div>
                        
                         <button class="btn btn-success waves-effect waves-light m-r-10" type="submit"><i class="fa fa-save"></i> Guardar</button>
-                                   </form>
+                    <br><br><br>              
+                    </form>
                 </div>
             </div>
         </div>
         <div class="col-lg-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Fotografia de usuario</h4>
+            <div id="targeta" class="card">
+                <div class="card-body" align="center">
+                    <h4 class="card-title">Fotografía de usuario</h4>
                     
-                    <img src="">
-
-                    <input type="file">
+                    <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
                     <br><br>
-                    <button class="btn btn-success waves-effect waves-light m-r-10" type="submit"><i class="fa fa-save"></i> Actualizar Fotografia</button>
+                    <input (change)="seleccionImage( $event.target.files[0])"type="file">
+                    <br><br>
+                    <button (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-success waves-effect waves-light m-r-10" type="submit"><i class="fa fa-save"></i> Actualizar Fotografía</button>
   
 
                 </div>
@@ -42,3 +44,58 @@
         </div>
        
     </div>
+<div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                            <h4 class="card-title">Información del consultorio</h4>
+                            <form ngNativeValidate #datos="ngForm" (ngSubmit)="guardarDatos (datos.value)"class="form p-t-20">
+   
+                            <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Nombre del consultorio</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-home"></i></div>
+                                            <input [(ngModel)]="nutriologo[0].nombreconsultorio" name="nombreconsultorio" type="text" class="form-control"  required>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputuname">Direccion</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><i class="mdi mdi-map-marker"></i></div>
+                                                    <input [(ngModel)]="nutriologo[0].direccion" name="direccion"type="text" class="form-control"  required >
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputuname">Teléfono</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><i class="mdi mdi-deskphone"></i></div>
+                                                            <input [(ngModel)]="nutriologo[0].telefono" name="telefono" type="text" class="form-control"  required>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputuname">Horario</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="mdi mdi-clock"></i></div>
+                                                                    <input [(ngModel)]="nutriologo[0].horario" name="horario" type="text" class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                            
+                                                            <button class="btn btn-success waves-effect waves-light m-r-10" type="submit"><i class="fa fa-save"></i> Actualizar Información</button>
+  
+                                    
+                                      <!--/span-->
+                                  </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
