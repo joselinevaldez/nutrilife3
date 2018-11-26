@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-           
+          <form #platillosP="ngForm"ngNativeValidate >
+       
             <div class="card-body">
                 <h4>Datos del platillo</h4>
                 <hr>
@@ -10,7 +11,7 @@
                    <div class="col-md-6">
                       <div class="form-group">
                          <label class="control-label">Nombre del platillo</label>
-                          <input type="text" id="nombre" class="form-control" >
+                          <input type="text" [(ngModel)]="platillo.nombre" name="nombre" required class="form-control" >
                       </div>
                     </div>
 
@@ -19,14 +20,14 @@
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label class="control-label">Tiempo de comida</label>
-                            <select class="form-control custom-select">
-                                <option value="">Pre Entrenamiento</option>
-                                <option value="">Post Entrenamiento</option>
-                                <option value="">Desayuno</option>
-                                <option value="">Media Mañana</option>
-                                <option value="">Comida</option>
-                                <option value="">Media Tarde</option>
-                                <option value="">Cena</option>
+                            <select [(ngModel)]="platillo.tiempocomida" name="tiempocomida" required class="form-control custom-select">
+                                <option value="Pre Entrenamiento">Pre Entrenamiento</option>
+                                <option value="Post Entrenamiento">Post Entrenamiento</option>
+                                <option value="Desayuno">Desayuno</option>
+                                <option value="Media Mañana">Media Mañana</option>
+                                <option value="Comida">Comida</option>
+                                <option value="Media Tarde">Media Tarde</option>
+                                <option value="Cena">Cena</option>
                                 
                             </select>
                             </div>
@@ -38,6 +39,24 @@
                 <h4>Agregar Alimentos al platillo</h4>
                 <hr>
                 <div class="row">
+                    
+                        <button (click)="categoria(1)"class="btn-categoria active"><img class="img-categoria"src="../../../assets/alimentos/lacteos.jpg"></button>
+                                      
+                        <button (click)="categoria(2)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/Frutas.png"></button>
+                                      
+                        <button (click)="categoria(3)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/cereales.jpg"></button>
+                    
+                        <button (click)="categoria(4)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/legumbres.jpg"></button>           
+                   
+                        <button (click)="categoria(5)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/verduras.jpg"></button>
+                        
+                 
+                        <button (click)="categoria(6)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/pescado.jpg"></button>
+                        <button (click)="categoria(7)"class="btn-categoria"><img class="img-categoria" src="../../../assets/alimentos/grasas.jpg"></button>
+                      
+                   
+                </div>
+                <div class="row">
                 <div class="col-lg-5">
                     <div class="card">
                        
@@ -45,31 +64,30 @@
                           
                             <div class="form-group row ">
                                 <label class="control-label">Categoria</label>
-                                <select class="form-control custom-select">
-                                    <option value="">Categoria</option>
+                               
+                                <input id="categoria" disabled class="form-control" type="text">
                                    
                                     
-                                </select>
+                               
                                 </div>
                             <div class="form-group row">
                                 <label class="control-label">Alimento</label>
-                                <select id="alimento" name="alimento" class="form-control custom-select">
-                                    <option value="1">Alimento uno</option>
-                                    <option value="2">Alimento dos</option>
-                                    <option value="3">Alimento tres</option>
+                                <select  id="alimento" name="alimento" class="form-control custom-select" >
+                                    <option  *ngFor="let a of alimentos"  value={{a._id}},{{a.unidad}} >{{a.nombre}}</option>
+                                    
                                     
                                 </select>
                                 </div>
                             <div class="row">
                                 <div class="form-group row">
-                                <div class="col-lg-6">
-                                <label class="control-label">Unidad</label>
-                                 <input type="text" disabled id="nombre" class="form-control" >
-                                  </div>
+                                
+                               
+                                 <input hidden="hidden" type="text" disabled name="unidad"id="unidad" class="form-control" >
                                   
-                                  <div class="col-lg-6">
+                                  
+                                  <div class="col-lg-12">
                                       <label class="control-label">Cantidad</label>
-                                      <input type="number" min="1" value="1" id="cantidad" class="form-control" >
+                                      <input type="number" min="0.00" max="10000" step="25.00" value="25.00" id="cantidad" class="form-control" >
                                   
                                   </div>
                                 </div>
@@ -93,15 +111,17 @@
                                             <th hidden="hidden">#id</th>
                                             <th>Alimento</th>
                                             <th>Cantidad</th>
+                                            <th>Unidad</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let data of datas">
                                             <td hidden="hidden">{{data.fila}}</td>
-                                            <td hidden="hidden">{{data.id}}</td>
-                                            <td>{{data.alimento}}</td>
+                                            <td hidden="hidden">{{data.alimento}}</td>
+                                            <td>{{data.nombre}}</td>
                                             <td>{{data.cantidad}}</td>
+                                            <td>{{data.unidad}}</td>
                                             <td> <button (click)="remover(data.fila)" class="btn btn-light btn-circle" > <i class="fa fa-remove text-danger"></i></button>
                                             </td>
                                         </tr>
@@ -111,19 +131,24 @@
                                 </table>
                             </div>
                             <br>
-                            <div id="derecha" class="row pull-right">
-                                <div class="form-group row">
-                                   
-                                 <button class="btn btn-success"> <i class="fa fa-save"></i> Guardar Platillo</button>
-                                 
-                                   
-                                  </div>
-                             </div>
-                        </div>
+                            
+                                    <div id="derecha" class="row pull-right col-md-3">
+                                        <div class="form-group row">
+                                        
+                                        <button (click)="nuevoPlatillo(platillosP)" class="btn btn-success"> <i class="fa fa-save"></i> Guardar Platillo</button>
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                    </div>
+                        
                     </div>
                 </div>
               </div>
             </div>
+        </form>
         </div>
     </div>
 </div>    
+
+

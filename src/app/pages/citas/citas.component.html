@@ -1,185 +1,100 @@
 
 <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
+        <div class="col-3">
+          <div class="card">
+              <div class="card-body">
+                <h3>Mis citas</h3>
+                <hr>
+                   <br>
+                <h5>Indicaciones</h5>
                 <div class="row">
-                    <div class="col-xlg-2 col-lg-3 col-md-4 ">
-                        <div class="card-body inbox-panel"> <button class="btn btn-block btn-success mb-2 mr-2" (click)="openLg(content)">Nueva Cita</button>
-                            
-                            <h4>Búsqueda</h4>
-                            <hr>
-                            <div class="form-group">
-                                    <label>Paciente:</label>
-                                    <select class="form-control custom-select">
-                                            <option value="">Seleccione</option>
-                                          
-                                        </select>
-                                
-                            </div>
-                            <div class="form-group">
-                                    <label>Fecha:</label>
-                                    <input type="date" class="form-control" >
-                                
-                            </div>
-                            <div class="form-group">
-                                    <label>Estado de la cita:</label>
-                                    <select class="form-control custom-select">
-                                            <option value="">Canceladas</option>
-                                            <option value="">Pendientes</option>
-                                            <option value="">Terminadas</option>
-                                          
-                                        </select>
-                                
-                            </div>
-                            <button class="btn btn-block btn-primary mb-2 mr-2" >Buscar</button>
+                  <div class="col-lg-6">
+                    Pendientes
+                  </div>
+                  <div class="col-lg-6">
+                      <span  class="label label-orange text-orange">00000000000000</span>
+                   
+                  </div>
+                </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          Canceladas
                         </div>
-                    </div>
-                    <div class="col-xlg-10 col-lg-9 col-md-8  b-l">
+                        <div class="col-lg-6">
+                            <span  class="label label-red text-red">00000000000000</span>
+                        
+                        </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          Realizadas
+                        </div>
+                        <div class="col-lg-6">
+                            <span  class="label label-verde ">00000000000000</span>
+                        
+                        </div>
+                  </div>
+                
+              </div>
+          </div>
+          </div>
+                <div class="col-9">
+                    <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Mis Citas</h3>
-                                          <div class="table-responsive">
-                                              
-                                            <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th hidden="hidden">id</th>
-                                                          
-                                                            <th>Paciente</th>
-                                                            <th>Teléfono</th>
-                                                            <th>Fecha</th>
-                                                            <th>Hora</th>
-                                                            <th>Estatus</th>
-                                                            <th></th>
-                                                            <!--<th class="text-nowrap">Action</th>-->
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        
-                                                            <tr *ngFor="let cita of citas">
-                                                                <td hidden="hidden">{{ cita.id}}</td>
-                                                                <td>{{ cita.nombre}}</td>
-                                                                <td>{{ cita.telefono}}</td>
-                                                                <td>{{ cita.fecha}}</td>
-                                                                <td>{{ cita.hora}}</td>
-                                                                <td *ngIf="cita.estatus=='2'">
-
-                                                                        <div class="label label-table label-warning">Pendiente</div>
-                                                                </td>
-                                                                <td *ngIf="cita.estatus=='0'">
-
-                                                                        <div class="label label-table label-danger">Cancelada</div>
-                                                                </td>
-                                                                <td *ngIf="cita.estatus=='1'">
-
-                                                                        <div class="label label-table label-success">Terminada</div>
-                                                                </td>
-                                                                <td>
-                                                                    <button id="botonsito" (click)="mostrarModal(cita,editarCita)"title="Preciona para editar la cita" class="btn btn-info btn-xs"><i class="mdi mdi-pencil"></i></button>
-                                        
-                                                                    <button id="botonsito" *ngIf="cita.estatus=='2'" title="Preciona para comenzar la cita" class="btn btn-primary btn-xs"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
-                                                                    <button id="botonsito" *ngIf="cita.estatus=='2'" title="Preciona para cancelar la cita" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
-                                                                    <button type="button" class="btn btn-success btn-xs" title="Preciona para reactivar la cita"  id="botonsito" *ngIf="cita.estatus=='0'" ><i class="fa fa-check"></i></button>
-                                                                </td>
-                                                              </tr>
-                                                        
-                                                       
-                                                      
-                                                    </tbody>
-                                                </table> 
-                                             </div>
-                                       
+                            <div *ngIf="calendarOptions">
+                                <ng-fullcalendar #ucCalendar [options]="calendarOptions"  (initialized)="loadevents()" (eventClick)="eventClick($event.detail);openLg(editar)" (eventDrop)="updateEvent($event.detail)"
+                                    (eventResize)="updateEvent($event.detail)"  (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+                                    
+                           
+                           
+                                  </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-<!-- BEGIN MODAL -->
-<ng-template #editarCita let-modal>
-    <div class="modal-header">
-        <h3>Editar Cita</h3>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-            <div class="row p-t-20">
-                    <input hidden="hidden" value="{{cita2.id}}" type="text" id="lastName" class="form-control form-control" >
-                        
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Nombre del Paciente:</label>
-                            <input value="{{cita2.nombre}}"type="text" id="firstName" class="form-control" >
-                            
-                        </div>
+  
+
+            <ng-template #editar let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">Informacion Cita</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
-                    <!--/span-->
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                            <label class="control-label">Telefono:</label>
-                            <input value="{{cita2.telefono}}" type="text" id="lastName" class="form-control form-control" >
-                          
-                        </div>
-                    </div>
-                    
-                                      <!--/span-->
-                </div>
-                <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Fecha</label>
-                                <input value="{{cita2.fecha}}" type="date" id="firstName" class="form-control" placeholder="John doe">
-                                </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group ">
-                                <label class="control-label">Hora</label>
-                                <input value="{{cita2.hora}}" type="text" id="lastName" class="form-control form-control" >
+                    <form #editarCita="ngForm" ngNativeValidate (ngSubmit)="editarC(editarCita)">
+                     
+                    <div class="modal-body">
+                      
+                             
+                          <div class="form-group">
+                             <label>Fecha:</label>
+                            <input disabled type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
                                
-                            </div>
+                           </div>
+                         <div class="form-group">
+                          <label>Hora (formato 24hrs):</label>
+                          <input disabled type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
+                      
+                    </div>  
+                    <div class="row">
+                      <div class="col-md-3" >
+                          <label>Estatus:</label>
                         </div>
+                        <div class="col-md-9" >
+                            <select disabled [(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                                <option class="text-danger" value="0"> Cancelada</option>
+                                <option class="text-warning" value="2"> Pendiente</option>
+                                <option class="text-success" value="1"> Realizada</option>
+                              
+                                
+                            </select>
+                          </div>
+                      </div>
+                    <br>
+                                      </div>
+                    <div class="modal-footer">
                         
-                                          <!--/span-->
+                      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
                     </div>
-              
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
-<ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Nueva Cita</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-            <div class="form-group">
-                    <label>Paciente:</label>
-                    <select class="form-control custom-select">
-                            <option value="">Seleccione</option>
-                          
-                        </select>
-                
-            </div>
-            <div class="form-group">
-                    <label>Fecha:</label>
-                    <input type="date" class="form-control" >
-                
-            </div> 
-            <div class="form-group">
-                    <label>Hora:</label>
-                    <input type="time" class="form-control" >
-                
-            </div> <br>
-            <button class="btn btn-block btn-success mb-2 mr-2" >Agendar Cita</button>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
-  
-
-  
+                  </form>  
+                  </ng-template>

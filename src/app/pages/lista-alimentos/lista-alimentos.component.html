@@ -1,3 +1,179 @@
-<p>
-  lista-alimentos works!
-</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                 <div class="col-12">
+                <input #input (keyup)="buscarAlimento (input.value)" type="text" class="form-control" placeholder="Buscar ...">
+                 </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+            <div *ngIf="alimento.length>0" class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Alimentos Registrados (<small>{{ totalRegistro }}</small>)</h3>
+                       <div id="tablaPacientes" class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th hidden="hidden">Id</th>
+                                    <th>Nombre</th>
+                                    <th>Grupo</th>
+                                    <th>Estatus</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let a of alimento">
+                                    <td hidden="hidden">{{a._id}}</td>
+                        
+                                    <td>{{a.nombre}}</td>
+                                    <td>{{a.grupo}}</td>
+                                    
+                                    <td> 
+                                    <span *ngIf="a.estatus=='1'" class="label label-success">Activo</span>
+                                    <span *ngIf="a.estatus=='0'" class="label label-danger">Inactivo</span>
+                                    </td>
+                                    <td>
+                                            <button id="botonsito" (click)="modalEditar(a,editar)" class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>
+                                            <button  *ngIf="a.estatus=='1'" (click)="desactivar(a)" id="botonsito" class="btn btn-danger btn-circle"><i class="fa fa-remove"></i></button>
+                                            <button *ngIf="a.estatus=='0'"  (click)="reactivar(a)"id="botonsito" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                                                              
+                                                  
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                        <button (click)="cambiarDesde(-5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-left"></i> Anterior</button>
+                        <button  (click)="cambiarDesde(5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-right"></i> Siguiente</button>
+                                       
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="alimento.length===0"class="col-12">
+                    <div class="alert alert-info">
+                        No se encontro ningun alimento..
+                    </div>
+                </div>
+        </div>
+        <ng-template #editar let-modal>
+            <div class="modal-header">
+               <h4 class="modal-title">Editar Alimento</h4>
+               <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form #editarAlimento="ngForm" ngNativeValidate (ngSubmit)="actualizarAlimento(editarAlimento)">
+                    
+            <div class="modal-body">
+                <!--CONTENIDO DEL MODAL-->
+                <div class="form-body">
+                    <h3 class="box-title m-t-10">Datos del alimento</h3>
+                    <hr>
+                  <div class="row p-t-10">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="control-label">Nombre</label>
+                              <input [(ngModel)]="alimentos.nombre" name="nombre" class="form-control" required type="text"  >
+                               </div>
+                      </div>
+                    
+                      <!--/span-->
+                    
+                      <div class="col-md-6">
+                          <div class="form-group ">
+                              <label class="control-label">Grupo</label>
+                              <select [(ngModel)]="alimentos.grupo" name="grupo" required class="form-control custom-select">
+                                  <option *ngFor="let g of grupos" value="{{g}}">{{g}}</option>
+                                  
+                              </select>
+                               </div>
+                      </div>
+
+                     
+                      <!--/span-->
+                  </div>
+                  <!--/row-->
+                  <h3 class="box-title m-t-10">Cantidades Equivalentes</h3>
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group ">
+                              <label class="control-label">Cantidad</label>
+                              <input [(ngModel)]="alimentos.cantidad" name="cantidad" type="number"  min="0" required class="form-control" >
+                              </div>
+                      </div>
+                  <div class="col-md-4">
+                        <div class="form-group ">
+                            <label class="control-label">Unidad</label>
+                            <select [(ngModel)]="alimentos.unidad" name="unidad" required class="form-control custom-select">
+                                <option *ngFor="let u of unidad" value="{{u}}">{{u}}</option>
+                                
+                            </select>
+                             </div>
+                    </div>
+                      <!--/span-->
+                     
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label class="control-label">Peso Neto (g o ml)</label>
+                              <input [(ngModel)]="alimentos.peso" name="peso"type="number"  min="0" required class="form-control" >
+                       </div>
+                      </div>
+                      <!--/span-->
+                     
+                  </div>
+                  
+                  <h3 class="box-title m-t-10">Contenido Nutrimental</h3>
+                  <hr>
+                  
+                  <!--/row-->
+                  <div class="row">
+                      <div class="col-md-3">
+                          <div class="form-group">
+                              <label class="control-label">Calorías (kcal)</label>
+                              <input [(ngModel)]="alimentos.calorias" name="calorias" type="number" required  min="0"class="form-control" >
+                       </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="form-group">
+                              <label class="control-label">Proteínas (g)</label>
+                              <input [(ngModel)]="alimentos.proteinas" name="proteinas" type="number" min="0" required class="form-control" >
+                       </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="form-group">
+                              <label class="control-label">Grasas (g)</label>
+                              <input [(ngModel)]="alimentos.grasas" name="grasas"type="number" min="0" required class="form-control" >
+                       </div>
+                      </div>
+                      <div class="col-md-3">
+                              <div class="form-group">
+                                  <label class="control-label">Fibra (g)</label>
+                                  <input [(ngModel)]="alimentos.fibras" name="fibras"type="number" min="0" required class="form-control" >
+                           </div>
+                          </div>
+                      <!--/span-->
+                      
+                      <!--/span-->
+                  </div>
+                  
+                         
+                  
+              </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-success" ><i class="fa fa-save"></i> Guardar</button>
+            
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+        </form> 
+        </ng-template>

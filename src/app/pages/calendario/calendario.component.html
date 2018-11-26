@@ -1,0 +1,174 @@
+<!--<a (click)="loadevents()"> loadevents</a>
+<p>Display event : {{displayEvent | json}}</p>-->
+<div class="row">
+    <div class="col-3">
+      <div class="card">
+          <div class="card-body">
+            <h3>Nueva cita</h3>
+            <hr>
+            <button (click)="openNueva(nueva)" class="btn btn-block btn-primary"> Nueva Cita</button>
+            <br>
+            <h5>Indicaciones</h5>
+            <div class="row">
+              <div class="col-lg-6">
+                Pendientes
+              </div>
+              <div class="col-lg-6">
+                  <span  class="label label-orange text-orange">00000000000000</span>
+               
+              </div>
+            </div>
+              <div class="row">
+                  <div class="col-lg-6">
+                      Canceladas
+                    </div>
+                    <div class="col-lg-6">
+                        <span  class="label label-red text-red">00000000000000</span>
+                    
+                    </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-6">
+                      Realizadas
+                    </div>
+                    <div class="col-lg-6">
+                        <span  class="label label-verde ">00000000000000</span>
+                    
+                    </div>
+              </div>
+            
+          </div>
+      </div>
+      </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div *ngIf="calendarOptions">
+                            <ng-fullcalendar #ucCalendar [options]="calendarOptions"  (initialized)="loadevents()" (eventClick)="eventClick($event.detail);openLg(editar)" (eventDrop)="updateEvent($event.detail)"
+                                (eventResize)="updateEvent($event.detail)"  (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+                                
+                       
+                       
+                              </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #editar let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Editar Cita</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #editarCita="ngForm" ngNativeValidate (ngSubmit)="editarC(editarCita)">
+             
+            <div class="modal-body">
+              
+                     <div class="form-group">
+                        <label>Titulo:</label>
+                        <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
+                    
+                   </div>
+                    <div class="form-group">
+                    <label>Paciente:</label>
+                    <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select" required>
+                        <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
+                       
+                        
+                    </select>
+                    </div>
+                  <div class="form-group">
+                     <label>Fecha:</label>
+                    <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
+                       
+                   </div>
+                 <div class="form-group">
+                  <label>Hora (formato 24hrs):</label>
+                  <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
+              
+            </div>  
+            <div class="row">
+              <div class="col-md-3" >
+                  <label>Estatus:</label>
+                </div>
+                <div class="col-md-9" >
+                    <select *ngIf="cita.estatus==='0'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                        <option class="text-danger" value="0"> Cancelada</option>
+                        <option class="text-warning" value="2"> Pendiente</option>
+                        
+                        
+                    </select>
+                    <select *ngIf="cita.estatus==='1'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                                  
+                        <option class="text-success" value="1"> Realizada</option>
+                          
+                            
+                        </select>
+                        <select *ngIf="cita.estatus==='2'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                                <option class="text-danger" value="0"> Cancelada</option>
+                                <option class="text-warning" value="2"> Pendiente</option>
+                                    
+                               <option class="text-success" value="1"> Realizada</option>
+                              
+                                
+                            </select>
+                        
+                  </div>
+              </div>
+            <br>
+                              </div>
+            <div class="modal-footer">
+                <button type ="submit" class="btn  btn-success mb-2 mr-2" >Guardar</button>
+           
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </form>  
+          </ng-template>
+
+          <ng-template #nueva let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Nueva Cita</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form #nuevaCita="ngForm" ngNativeValidate (ngSubmit)="nuevaC(editarCita)">
+               
+              <div class="modal-body">
+                
+                       <div class="form-group">
+                          <label>Titulo:</label>
+                          <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
+                      
+                     </div>
+                      <div class="form-group">
+                      <label>Paciente:</label>
+                      <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select" required>
+                          <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
+                         
+                          
+                      </select>
+                      </div>
+                    <div class="form-group">
+                       <label>Fecha:</label>
+                      <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
+                         
+                     </div>
+                   <div class="form-group">
+                    <label>Hora (formato 24hrs):</label>
+                    <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
+                
+              </div>  
+              
+             
+                                </div>
+              <div class="modal-footer">
+                  <button type ="submit" class="btn  btn-success mb-2 mr-2" >Guardar</button>
+             
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              </div>
+            </form>  
+            </ng-template>
+         

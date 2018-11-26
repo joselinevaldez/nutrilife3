@@ -1,4 +1,4 @@
-<div class="row" id="contenedor">
+<div *ngIf="usuario.role==='NUTRIOLOGO_ROLE'"class="row" id="contenedor">
   <div class="col-12">
       <div id="contenedor" class="card">
           <div id="contenedor" class="card-body">
@@ -7,7 +7,7 @@
                   <div class="row">
                       <div class="col-md-6 col-lg-3 ">
                           <div  class="statistic__item statistic__item--green">
-                              <h2 class="number">0</h2>
+                              <h2 class="number">{{ numPacientes }}</h2>
                               <span class="desc">Pacientes</span>
                               <div class="icon">
                                   <i class="mdi mdi-account"></i>
@@ -16,7 +16,7 @@
                       </div>
                       <div class="col-md-6 col-lg-3">
                           <div  class="statistic__item statistic__item--purple">
-                              <h2 class="number">0</h2>
+                              <h2 class="number">{{ numAlimentos }}</h2>
                               <span class="desc">Alimentos</span>
                               <div class="icon">
                                   <i class="mdi mdi-food-apple"></i>
@@ -25,7 +25,7 @@
                       </div>
                       <div class="col-md-6 col-lg-3">
                           <div  class="statistic__item statistic__item--blue">
-                              <h2 class="number">0</h2>
+                              <h2 class="number">{{ numPlatillos }}</h2>
                               <span class="desc">Platillos</span>
                               <div class="icon">
                                   <i class="mdi mdi-silverware-variant"></i>
@@ -34,7 +34,7 @@
                       </div>
                       <div class="col-md-6 col-lg-3">
                           <div  class="statistic__item statistic__item--red">
-                              <h2 class="number">0</h2>
+                              <h2 class="number">{{numDietas}}</h2>
                               <span class="desc">Dietas</span>
                               <div class="icon">
                                   <i class="mdi mdi-food-variant"></i>
@@ -44,17 +44,7 @@
                   </div>
               </div>
             </section>
-           <h3 align="center">Citas del dia</h3>
-           <hr>
-           <div class="alert alert-success">
-                <strong>Muy bien!</strong> El dia de hoy has atendido: citas.
-            </div>
-           <div class="alert alert-warning">
-                <strong>Atencion !</strong> El dia de hoy tienes: citas pendientes.
-            </div>
-            <div class="alert alert-danger">
-                    <strong></strong> El dia de hoy cancelaste: citas .
-                </div>
+           
          <!--  <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -117,4 +107,58 @@
           </div>
         </div>
       </div>
+</div>
+
+<div *ngIf="usuario.role==='PACIENTE_ROLE'"class="col-12" id="contenedor">
+        <div class="card">
+                <div class="card-body">
+                    <div class="row col-12">
+                        <div class="alert alert-success col-12">
+                                <strong>HOLA {{paciente.nombre}} {{paciente.app}} {{paciente.apm}}</strong> <br> Antes de rendirte recuerda siempre el motivo por el cual decidiste cambiar tus habitos alimenticios: "{{paciente.motivo}}".
+                            </div>
+                    </div>
+                    
+                            <div class="row">
+                                   
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex no-block">
+                                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso.png"></div>
+                                                    <div class="align-self-center">
+                                                        <h6 class="text-muted m-t-10 m-b-0">Peso incial</h6>
+                                                        <h2 class="m-t-0">{{peso}} kg</h2></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex no-block">
+                                                        <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_actual.png"></div>
+                                                    <div class="align-self-center">
+                                                        <h6 class="text-muted m-t-10 m-b-0">Peso Actual</h6>
+                                                        <h2 class="m-t-0">{{pesoA}} kg</h2></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex no-block">
+                                                        <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_bajado.png"></div>
+                                                    <div class="align-self-center">
+                                                        <h6 class="text-muted m-t-10 m-b-0">Peso bajado</h6>
+                                                        <h2 class="m-t-0">{{pesoB}} kg</h2></div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
 </div>

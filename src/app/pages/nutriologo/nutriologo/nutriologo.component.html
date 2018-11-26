@@ -1,0 +1,53 @@
+<div class="row">
+<div class="col-lg-5 col-xlg-4 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <div align="center"class="m-t-30"> <img width="200" height="160" class="img-circle" [src]="nutriologo['nutriologo'].img | imagen">
+                <h4 class="card-title m-t-10">{{nutriologo["nutriologo"].nombre}}</h4>
+                <h6 class="card-subtitle">{{nutriologo["nutriologo"].email}}</h6>
+                
+              </div>
+        </div>
+        <div>
+           </div>
+       
+    </div>
+</div>
+<div class="col-lg-7">
+    <div class="card">
+        <div class="card-body">
+              <form class="form p-t-20">
+                <div class="form-group">
+                    <label for="exampleInputuname">Nombre del consultorio</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-home"></i></div>
+                        <input class="form-control" disabled value="{{nutriologo.nombreconsultorio}}" type="text" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Direccion</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="mdi mdi-map-marker"></i></div>
+                        <input class="form-control" disabled value="{{nutriologo.direccion}}" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pwd1">Telefono</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="mdi mdi-deskphone"></i></div>
+                        <input class="form-control" disabled value="{{nutriologo.telefono}}" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pwd2">Horario</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="mdi mdi-clock"></i></div>
+                        <input class="form-control" disabled value="{{nutriologo.horario}}" >
+                    </div>
+                </div>
+                
+              </form>
+        </div>
+    </div>
+</div>
+</div>

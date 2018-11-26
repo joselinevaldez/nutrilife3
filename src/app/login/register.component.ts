@@ -54,6 +54,9 @@ forma: FormGroup;
     });
   
   }
+  terminos(){
+    swal("Terminos y condiciones","Estos son los terminos y condiciones");
+  }
   registrarUsuario(){
      if(this.forma.invalid){
        return;
@@ -68,6 +71,7 @@ forma: FormGroup;
       this.forma.value.correo,
       this.forma.value.password
     );
+    console.log(usuario);
 
     this._usuarioService.crearUsuario(usuario)
     .subscribe( resp =>  this.router.navigate(["/login"])

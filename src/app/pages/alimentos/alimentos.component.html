@@ -1,17 +1,18 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-           
+                <form #alimentos="ngForm"ngNativeValidate (ngSubmit)="nuevoAlimento(alimentos)">
+       
             <div class="card-body">
-                <form action="#">
+                    
                     <div class="form-body">
                           <h3 class="box-title m-t-10">Datos del alimento</h3>
                           <hr>
                         <div class="row p-t-10">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Nombre(s)</label>
-                                    <input type="text" id="nombre" class="form-control" >
+                                    <label class="control-label">Nombre</label>
+                                    <input [(ngModel)]="alimento.nombre" name="nombre" class="form-control" required type="text"  >
                                      </div>
                             </div>
                           
@@ -20,8 +21,8 @@
                             <div class="col-md-6">
                                 <div class="form-group ">
                                     <label class="control-label">Grupo</label>
-                                    <select class="form-control custom-select">
-                                        <option value="">Seleccionar grupo</option>
+                                    <select [(ngModel)]="alimento.grupo" name="grupo" required class="form-control custom-select">
+                                        <option *ngFor="let g of grupos" value="{{g}}">{{g}}</option>
                                         
                                     </select>
                                      </div>
@@ -37,14 +38,14 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label class="control-label">Cantidad</label>
-                                    <input type="text" id="" class="form-control" >
+                                    <input [(ngModel)]="alimento.cantidad" name="cantidad" type="number"  min="0" required class="form-control" >
                                     </div>
                             </div>
                         <div class="col-md-4">
                               <div class="form-group ">
                                   <label class="control-label">Unidad</label>
-                                  <select class="form-control custom-select">
-                                      <option value="">Seleccionar unidad</option>
+                                  <select [(ngModel)]="alimento.unidad" name="unidad" required class="form-control custom-select">
+                                      <option *ngFor="let u of unidad" value="{{u}}">{{u}}</option>
                                       
                                   </select>
                                    </div>
@@ -54,7 +55,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Peso Neto (g o ml)</label>
-                                    <input type="text" id="" class="form-control" >
+                                    <input [(ngModel)]="alimento.peso" name="peso"type="number"  min="0" required class="form-control" >
                              </div>
                             </div>
                             <!--/span-->
@@ -63,198 +64,47 @@
                         
                         <h3 class="box-title m-t-10">Contenido Nutrimental</h3>
                         <hr>
-                        <h4 class="box-title m-t-10">Macronutrimentos</h4>
+                        
                         <!--/row-->
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Calorías (kcal)</label>
-                                    <input type="text" id="apePaterno" class="form-control" >
+                                    <input [(ngModel)]="alimento.calorias" name="calorias" type="number" required  min="0"class="form-control" >
                              </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Proteínas (g)</label>
-                                    <input type="text" id="apePaterno" class="form-control" >
+                                    <input [(ngModel)]="alimento.proteinas" name="proteinas" type="number" min="0" required class="form-control" >
                              </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="control-label">Lípidos (g)</label>
-                                    <input type="text" id="apePaterno" class="form-control" >
+                                    <label class="control-label">Grasas (g)</label>
+                                    <input [(ngModel)]="alimento.grasas" name="grasas"type="number" min="0" required class="form-control" >
                              </div>
                             </div>
                             <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label">H. Carbono (g)</label>
-                                        <input type="text" id="" class="form-control" >
+                                        <label class="control-label">Fibra (g)</label>
+                                        <input [(ngModel)]="alimento.fibras" name="fibras"type="number" min="0" required class="form-control" >
                                  </div>
                                 </div>
                             <!--/span-->
                             
                             <!--/span-->
-                        </div>
-                        <div class="row">
-                           
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Agua (ml)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Fibra (g)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Azúcar (g)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Etanol (g)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
                         </div>
                         
-                        <h4 class="box-title m-t-10">Grasas</h4>
-                      
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Saturadas (g)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Monoinsaturadas (g)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Poliinsaturadas (g)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Colesterol (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <!--/span-->
-                            
-                            <!--/span-->
-                        </div>
-                        <h4 class="box-title m-t-10">Vitaminas</h4>
-                      
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Vit. C (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Tiamina (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Vit. B5 (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Vit. B6 (mg)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                            
-                            <!--/span-->
-                            
-                            <!--/span-->
-                        </div>
-                        <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Vit. B12 (mg)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Vit. A (RAE)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Vit. D (pg)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                                <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">Vit. K (pg)</label>
-                                            <input type="text" id="" class="form-control" >
-                                     </div>
-                                    </div>
-                                
-                                <!--/span-->
-                                
-                                <!--/span-->
-                            </div>
-                        <!--/row-->
-                        <h4 class="box-title m-t-10">Minerales</h4>
-                      
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Calcio (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Hierro (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Magnesio (mg)</label>
-                                    <input type="text" id="" class="form-control" >
-                             </div>
-                            </div>
-                            <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="control-label">Sodio (mg)</label>
-                                        <input type="text" id="" class="form-control" >
-                                 </div>
-                                </div>
-                            
-                            <!--/span-->
-                            
-                            <!--/span-->
-                        </div>
+                               
+                        
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>&nbsp;
-                        <button type="button" class="btn btn-inverse">Cancelar</button>
-                    </div>
-                </form>
+                         </div>
+               
             </div>
+        </form>
         </div>
     </div>
   </div>

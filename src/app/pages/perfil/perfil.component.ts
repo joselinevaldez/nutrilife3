@@ -22,8 +22,14 @@ imagenTemp:File;
    }
 
   ngOnInit() {
+    this.usuario = JSON.parse( localStorage.getItem('usuario') );
+    console.log(this.usuario.role);
+    if ( localStorage.getItem('datos')) {
+      this.nutriologo = JSON.parse( localStorage.getItem('datos') );
+      
+    }
     console.log("este es el nutriologo: ",this.nutriologo);
-    console.log(this.nutriologo[0].nombreconsultorio);
+        //console.log(this.nutriologo[0].nombreconsultorio);
   }
 guardarUsuario( usuario: Usuario){
   this.usuario.nombre=usuario.nombre;
@@ -33,11 +39,11 @@ guardarUsuario( usuario: Usuario){
     });
   }
   guardarDatos(nutriologo:Nutriologo){
-    this.nutriologo[0].direccion=nutriologo.direccion;
-    this.nutriologo[0].nombreconsultorio=nutriologo.nombreconsultorio;
-    this.nutriologo[0].telefono=nutriologo.telefono;
-    this.nutriologo[0].horario=nutriologo.horario;
-    this._usuarioService.actualizarNutriologo(this.nutriologo[0],this.nutriologo)
+    this.nutriologo.direccion=nutriologo.direccion;
+    this.nutriologo.nombreconsultorio=nutriologo.nombreconsultorio;
+    this.nutriologo.telefono=nutriologo.telefono;
+    this.nutriologo.horario=nutriologo.horario;
+    this._usuarioService.actualizarNutriologo(this.nutriologo,this.nutriologo)
         .subscribe(resp =>{
           console.log(resp);
         });

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {SubirArchivoService,SettingsService,SharedService,SidebarService,LoginGuardGuard,CitasService} from './service.index';
+import {AdminGuard,PlatillosService,AlimentosService,PacienteGuard,SubirArchivoService,HomeService,PacienteService,EventService,SettingsService,SharedService,SidebarService,LoginGuardGuard,CitasService} from './service.index';
 import { UsuarioService } from './usuario/usuario.service';
 import { HttpClientModule} from '@angular/common/http';
 
@@ -17,8 +17,15 @@ import { HttpClientModule} from '@angular/common/http';
         SidebarService,
         UsuarioService,
         LoginGuardGuard,
+        AdminGuard,
+        PacienteGuard,
         CitasService,
-        SubirArchivoService
+        SubirArchivoService,
+        EventService,
+        PacienteService,
+        HomeService,
+        AlimentosService,
+        PlatillosService
 
     ],
     declarations:[]

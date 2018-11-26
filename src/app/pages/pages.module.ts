@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { PAGES_ROUTES } from './pages.routes';
-
+import { FullCalendarModule } from 'ng-fullcalendar';
 import { SharedModule } from '../shared/shared.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +37,16 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ListaAlimentosComponent } from './lista-alimentos/lista-alimentos.component';
 import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.component';
 
+import { CalendarioComponent } from './calendario/calendario.component';
+import { FechaPipe } from '../pipes/fecha.pipe';
+import { HomepacienteComponent } from './homepaciente/homepaciente/homepaciente.component';
+import { ProgresoComponent } from './progreso/progreso/progreso.component';
+import { MisdietasComponent } from './misdietas/misdietas/misdietas.component';
+import { NutriologoComponent } from './nutriologo/nutriologo/nutriologo.component';
+import { ListaDietasComponent } from './lista-dietas/lista-dietas/lista-dietas.component';
+
+
+
 @NgModule({
     declarations: [
         PagesComponent,
@@ -58,7 +68,21 @@ import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.compo
         ConsultasComponent,
         Perfil2Component,
         ListaAlimentosComponent,
-        ListaPlatillosComponent
+        ListaPlatillosComponent,
+    
+        CalendarioComponent,
+    
+        HomepacienteComponent,
+    
+        ProgresoComponent,
+    
+        MisdietasComponent,
+    
+        NutriologoComponent,
+    
+        ListaDietasComponent,
+    
+      
     ],
     exports: [
         DashboardComponent,
@@ -74,6 +98,8 @@ import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.compo
         CommonModule,
         PipesModule,
         ReactiveFormsModule,
+        FullCalendarModule
+        
         
     ]
 })

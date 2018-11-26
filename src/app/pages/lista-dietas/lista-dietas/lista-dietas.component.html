@@ -1,0 +1,582 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                 <div class="col-12">
+                <input #input (keyup)="buscarPlan( input.value)"type="text" class="form-control" placeholder="Buscar ...">
+                 </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+<div *ngIf="dietas.length>0" class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Dietas Registradas (<small>{{ totalRegistro }}</small>)</h3>
+           <div id="tablaPacientes" class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th hidden="hidden">Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo de persona</th>
+                        <th>Estatus</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of dietas">
+                        <td hidden="hidden">{{d._id}}</td>
+            
+                        <td>{{d.nombre}}</td>
+                        <td>{{d.tipopersona}}</td>
+                        
+                        <td> 
+                        <span *ngIf="d.estatus=='1'" class="label label-success">Activo</span>
+                        <span *ngIf="d.estatus=='0'" class="label label-danger">Inactivo</span>
+                        </td>
+                        <td>
+                                <button id="botonsito"  class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>
+                                <button id="botonsito" (click)="consultarPlatillos(d,verplatillo)"  class="btn btn-primary btn-circle"><i class="mdi mdi-food-variant"></i></button>
+                               
+                                <button  *ngIf="d.estatus=='1'" (click)="desactivar(d)" id="botonsito" class="btn btn-danger btn-circle"><i class="fa fa-remove"></i></button>
+                                <button *ngIf="d.estatus=='0'"  (click)="reactivar(d)"id="botonsito" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                                                  
+                                      
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+            <button (click)="cambiarDesde(-5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-left"></i> Anterior</button>
+            <button  (click)="cambiarDesde(5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-right"></i> Siguiente</button>
+                           
+        </div>
+    </div>
+</div>
+
+<div *ngIf="dietas.length===0"class="col-12">
+    <div class="alert alert-info">
+        No se encontro ninguna dieta..
+    </div>
+</div>
+</div>
+
+
+
+<ng-template #verplatillo let-modal>
+    <div class="modal-header">
+       <h4 class="modal-title">Dieta</h4>
+       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+              
+    <div class="modal-body">
+        <!--CONTENIDO DEL MODAL-->
+        <div  id="tablaplan"class="table-responsive">
+            <table id="tablaPlatillo"class="table table-bordered">
+                <thead>
+                    <tr  id="colorcabecera">
+                      
+                        <th>Dias</th>
+                        <th>Desayuno</th>
+                        <th>Comida</th>
+                        <th>Cena</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td >Domingo</td>
+                        <td  >
+                            <div class="col-md-12">
+                                  <label class="control-label">Platillo</label>
+        
+                                  <div class="input-group">
+                                          
+                                          <select value="{{d['domingo'].desayunoD}}"id="domingodesayuno" name="desayunoD"  required class="form-control custom-select ">
+                                                  <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                     
+                                              </select>
+                                              <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingodesayuno'); abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                  </div>
+        
+        
+        
+        
+                                 
+        
+        
+                            </div>
+                            
+        
+        
+                        </td>
+                        <td  >
+                              <div class="col-md-12">
+                                    <label class="control-label">Platillo</label>
+        
+                                    <div class="input-group">
+                                            
+                                            <select value="{{d['domingo'].comidaD}}" id="domingocomida" name="comidaD"  required class="form-control custom-select ">
+                                                    <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                       
+                                                </select>
+                                                <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingocomida'); abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                    </div>                            
+        
+                              </div>
+                              
+        
+                          </td>
+                          <td  >
+                                  <div class="col-md-12">
+                                        <label class="control-label">Platillo</label>
+        
+                                        <div class="input-group">
+                                                
+                                                <select value="{{d['domingo'].cenaD}}" id="domingocena"name="cenaD" required class="form-control custom-select ">
+                                                        <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                           
+                                                    </select>
+                                                    <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingocena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                        </div>                            
+        
+                                  </div>
+                                  
+        
+                              </td>
+                    </tr>
+                    <tr >
+                          <td >Lunes</td>
+                          <td  >
+                              <div class="col-md-12">
+                                    <label class="control-label">Platillo</label>
+        
+                                    <div class="input-group">
+                                            
+                                            <select value="{{d['lunes'].desayunoL}}" id="lunesdesayuno"name="desayunoL"  required class="form-control custom-select ">
+                                                    <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                       
+                                                </select>
+                                                <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunesdesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                    </div>
+        
+        
+        
+        
+                                   
+        
+        
+                              </div>
+                              
+        
+        
+                          </td>
+                          <td  >
+                              
+                                <div class="col-md-12">
+                                      <label class="control-label">Platillo</label>
+        
+                                      <div class="input-group">
+                                              
+                                              <select value="{{d['lunes'].comidaL}}" id="lunescomida" name="comidaL"  required class="form-control custom-select ">
+                                                      <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                         
+                                                  </select>
+                                                  <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunescomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                      </div>                            
+        
+                                </div>
+                                
+        
+                            </td>
+                            <td  >
+                                    <div class="col-md-12">
+                                          <label class="control-label">Platillo</label>
+        
+                                          <div class="input-group">
+                                                  
+                                                  <select value="{{d['lunes'].cenaL}}" id="lunescena"name="cenaL"  required class="form-control custom-select ">
+                                                          <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                             
+                                                      </select>
+                                                      <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunescena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                          </div>                            
+        
+                                    </div>
+                                    
+        
+                                </td>
+                      </tr>
+                      <tr >
+                              <td >Martes</td>
+                              <td  >
+                                  <div class="col-md-12">
+                                        <label class="control-label">Platillo</label>
+        
+                                        <div class="input-group">
+                                                
+                                                <select value="{{d['martes'].desayunoM}}" id="martesdesayuno"name="desayunoM"  required class="form-control custom-select ">
+                                                        <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                           
+                                                    </select>
+                                                    <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martesdesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                        </div>
+        
+        
+        
+        
+                                       
+        
+        
+                                  </div>
+                                  
+        
+        
+                              </td>
+                              <td  >
+                                    <div class="col-md-12">
+                                          <label class="control-label">Platillo</label>
+        
+                                          <div class="input-group">
+                                                  
+                                                  <select value="{{d['martes'].comidaM}}" id="martescomida"name="comidaM"  required class="form-control custom-select ">
+                                                          <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                             
+                                                      </select>
+                                                      <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martescomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                          </div>                            
+        
+                                    </div>
+                                    
+        
+                                </td>
+                                <td  >
+                                        <div class="col-md-12">
+                                              <label class="control-label">Platillo</label>
+        
+                                              <div class="input-group">
+                                                      
+                                                      <select value="{{d['martes'].cenaM}}" id="martescena" name="cenaM"  required class="form-control custom-select ">
+                                                              <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                 
+                                                          </select>
+                                                          <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martescena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                              </div>                            
+        
+                                        </div>
+                                        
+        
+                                    </td>
+                          </tr>
+                          <tr >
+                                  <td >Miercoles</td>
+                                  <td  >
+                                      <div class="col-md-12">
+                                            <label class="control-label">Platillo</label>
+        
+                                            <div class="input-group">
+                                                    
+                                                    <select value="{{d['miercoles'].desayunoMI}}" id="miercolesdesayuno"name="desayunoMI"  required class="form-control custom-select ">
+                                                            <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                               
+                                                        </select>
+                                                        <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolesdesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                            </div>
+        
+        
+        
+        
+                                           
+        
+        
+                                      </div>
+                                      
+        
+        
+                                  </td>
+                                  <td  >
+                                        <div class="col-md-12">
+                                              <label class="control-label">Platillo</label>
+        
+                                              <div class="input-group">
+                                                      
+                                                      <select value="{{d['miercoles'].comidaMI}}" id="miercolescomida" name="comidaMI"  required class="form-control custom-select ">
+                                                              <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                 
+                                                          </select>
+                                                          <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolescomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                              </div>                            
+        
+                                        </div>
+                                        
+        
+                                    </td>
+                                    <td  >
+                                            <div class="col-md-12">
+                                                  <label class="control-label">Platillo</label>
+          
+                                                  <div class="input-group">
+                                                          
+                                                          <select value="{{d['miercoles'].cenaMI}}" id="miercolescena"name="cenaMI" required class="form-control custom-select ">
+                                                                  <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                     
+                                                              </select>
+                                                              <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolescena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                  </div>                            
+           
+                                            </div>
+                                            
+          
+                                        </td>
+                              </tr>
+                              <tr >
+                                      <td >Jueves</td>
+                                      <td  >
+                                          <div class="col-md-12">
+                                                <label class="control-label">Platillo</label>
+        
+                                                <div class="input-group">
+                                                        
+                                                        <select value="{{d['jueves'].desayunoJ}}" id="juevesdesayuno"name="desayunoJ" required class="form-control custom-select ">
+                                                                <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                   
+                                                            </select>
+                                                            <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevesdesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                </div>
+        
+        
+        
+        
+                                               
+        
+        
+                                          </div>
+                                          
+        
+        
+                                      </td>
+                                      <td  >
+                                            <div class="col-md-12">
+                                                  <label class="control-label">Platillo</label>
+          
+                                                  <div class="input-group">
+                                                          
+                                                          <select value="{{d['jueves'].comidaJ}}" id="juevescomida"name="comidaJ"  required class="form-control custom-select ">
+                                                                  <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                     
+                                                              </select>
+                                                              <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevescomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                  </div>                            
+           
+                                            </div>
+                                            
+          
+                                        </td>
+                                        <td  >
+                                                <div class="col-md-12">
+                                                      <label class="control-label">Platillo</label>
+              
+                                                      <div class="input-group">
+                                                              
+                                                              <select value="{{d['jueves'].cenaJ}}" id="juevescena" name="cenaJ"  required class="form-control custom-select ">
+                                                                      <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                         
+                                                                  </select>
+                                                                  <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevescena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                      </div>                            
+               
+                                                </div>
+                                                
+              
+                                            </td>
+                                  </tr>
+                                  <tr >
+                                          <td >Viernes</td>
+                                          <td  >
+                                              <div class="col-md-12">
+                                                    <label class="control-label">Platillo</label>
+            
+                                                    <div class="input-group">
+                                                            
+                                                            <select value="{{d['viernes'].desayunoV}}" id="viernesdesayuno" name="desayunoV"  required class="form-control custom-select ">
+                                                                    <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                       
+                                                                </select>
+                                                                <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernesdesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                    </div>
+            
+            
+            
+            
+                                                   
+            
+            
+                                              </div>
+                                              
+            
+            
+                                          </td>
+                                          <td  >
+                                                <div class="col-md-12">
+                                                      <label class="control-label">Platillo</label>
+              
+                                                      <div class="input-group">
+                                                              
+                                                              <select value="{{d['viernes'].comidaV}}"id="viernescomida"name="comidaV"  required class="form-control custom-select ">
+                                                                      <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                         
+                                                                  </select>
+                                                                  <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernescomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                      </div>                            
+               
+                                                </div>
+                                                
+              
+                                            </td>
+                                            <td  >
+                                                    <div class="col-md-12">
+                                                          <label class="control-label">Platillo</label>
+                  
+                                                          <div class="input-group">
+                                                                  
+                                                                  <select value="{{d['viernes'].cenaV}}" id="viernescena" name="cenaV"  required class="form-control custom-select ">
+                                                                          <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                             
+                                                                      </select>
+                                                                      <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernescena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                          </div>                            
+                   
+                                                    </div>
+                                                    
+                  
+                                                </td>
+                                      </tr>
+                                      <tr >
+                                              <td >Sabado</td>
+                                              <td  >
+                                                  <div class="col-md-12">
+                                                        <label class="control-label">Platillo</label>
+                
+                                                        <div class="input-group">
+                                                                
+                                                                <select value="{{d['sabado'].desayunoS}}" id="sabadodesayuno"name="desayunoS"  required class="form-control custom-select ">
+                                                                        <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                           
+                                                                    </select>
+                                                                    <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadodesayuno');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                        </div>
+                
+                
+                
+                
+                                                       
+                
+                
+                                                  </div>
+                                                  
+                
+                
+                                              </td>
+                                              <td  >
+                                                    <div class="col-md-12">
+                                                          <label class="control-label">Platillo</label>
+                  
+                                                          <div class="input-group">
+                                                                  
+                                                                  <select value="{{d['sabado'].comidaS}}" id="sabadocomida" name="comidaS"  required class="form-control custom-select ">
+                                                                          <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                             
+                                                                      </select>
+                                                                      <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadocomida');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                          </div>                            
+                   
+                                                    </div>
+                                                    
+                  
+                                                </td>
+                                                <td  >
+                                                        <div class="col-md-12">
+                                                              <label class="control-label">Platillo</label>
+                      
+                                                              <div class="input-group">
+                                                                      
+                                                                      <select value="{{d['sabado'].cenaS}}" id="sabadocena" name="cenaS"  required class="form-control custom-select ">
+                                                                              <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
+                                                                                 
+                                                                          </select>
+                                                                          <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadocena');abrirModal(verplatillodieta)"><i class="mdi mdi-food-variant"></i></button>
+                                                              </div>                            
+                       
+                                                        </div>
+                                                        
+                      
+                                                    </td>
+                                          </tr>
+                   
+                   
+                </tbody>
+            </table>
+        </div>
+
+        
+    </div>
+    <div class="modal-footer">
+      
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+
+<ng-template #verplatillodieta let-modal>
+    <div class="modal-header">
+       <h4>INGREDIENTES</h4>
+       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+              
+    <div class="modal-body">
+        <!--CONTENIDO DEL MODAL-->
+        
+        <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            
+                            <th>Alimento</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ap of alimentosp">
+                            <td>{{ap.nombre}}</td>
+                            <td>{{ap.cantidad}}</td>
+                            <td>{{ap.unidad}}</td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+
+        
+    </div>
+    <div class="modal-footer">
+      
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+
+

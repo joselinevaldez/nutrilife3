@@ -1,3 +1,112 @@
-<p>
-  lista-platillos works!
-</p>
+<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                     <div class="col-12">
+                    <input #input (keyup)="buscarPlatillo( input.value)"type="text" class="form-control" placeholder="Buscar ...">
+                     </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div *ngIf="platillos.length >0" class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Platillos Registrados (<small>{{ totalRegistro }}</small>)</h3>
+               <div id="tablaPacientes" class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th hidden="hidden">Id</th>
+                            <th>Nombre</th>
+                            <th>Tiempo de comida</th>
+                            <th>Estatus</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of platillos">
+                            <td hidden="hidden">{{p._id}}</td>
+                
+                            <td>{{p.nombre}}</td>
+                            <td>{{p.tiempocomida}}</td>
+                            
+                            <td> 
+                            <span *ngIf="p.estatus=='1'" class="label label-success">Activo</span>
+                            <span *ngIf="p.estatus=='0'" class="label label-danger">Inactivo</span>
+                            </td>
+                            <td>
+                                    <button id="botonsito"  class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>
+                                    <button id="botonsito" (click)="consultarAlimentos(p,verplatillo)"  class="btn btn-primary btn-circle"><i class="mdi mdi-food-apple"></i></button>
+                                   
+                                    <button  *ngIf="p.estatus=='1'" (click)="desactivar(p)" id="botonsito" class="btn btn-danger btn-circle"><i class="fa fa-remove"></i></button>
+                                    <button *ngIf="p.estatus=='0'"  (click)="reactivar(p)"id="botonsito" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                                                      
+                                          
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+                <button (click)="cambiarDesde(-5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-left"></i> Anterior</button>
+                <button  (click)="cambiarDesde(5)"id="botonsito"  title="Desactivar" class="btn btn-secondary btn-rounded"><i class="fa  fa-chevron-right"></i> Siguiente</button>
+                               
+            </div>
+        </div>
+    </div>
+    <div *ngIf="platillos.length===0"class="col-12">
+            <div class="alert alert-info">
+                No se encontro ningun platillo..
+            </div>
+        </div>
+</div>
+
+
+<ng-template #verplatillo let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">{{platillover.nombre}}</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+                  
+        <div class="modal-body">
+            <!--CONTENIDO DEL MODAL-->
+            <label>INGREDIENTES</label><br>
+            <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th>Alimento</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ap of alimentosp">
+                                <td>{{ap.nombre}}</td>
+                                <td>{{ap.cantidad}}</td>
+                                <td>{{ap.unidad}}</td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+
+            
+        </div>
+        <div class="modal-footer">
+          
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    
+    </ng-template>
