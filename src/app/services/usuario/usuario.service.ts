@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import { Router } from '@angular/router';
 import { Nutriologo } from '../../models/nutriologo.models';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UsuarioService {

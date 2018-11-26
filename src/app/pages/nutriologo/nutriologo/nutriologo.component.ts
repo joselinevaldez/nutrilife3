@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NutriologoComponent implements OnInit {
 nutriologo:any[]=[];
-  constructor() { }
-
+existe:boolean=false;
+  constructor() { 
+    this.consultar();
+  }
+ 
   ngOnInit() {
+    this.consultar();
+  }
+  consultar(){
+    this.existe=true;
     this.nutriologo = JSON.parse(localStorage.getItem('datos'));
     console.log(this.nutriologo["nutriologo"]);
   }
-
 }

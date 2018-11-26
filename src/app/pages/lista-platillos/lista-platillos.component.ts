@@ -30,7 +30,10 @@ desde:number=0;
     constructor(
       public _platillosService:PlatillosService,
       private modalService: NgbModal
-    ) {}
+
+    ) {
+      this.consultarPlatillos();
+    }
   ngOnInit() {
     //this.platillos=null;
    this.consultarPlatillos();

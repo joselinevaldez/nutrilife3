@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="existe===true" class="row">
 <div class="col-lg-5 col-xlg-4 col-md-6">
     <div class="card">
         <div class="card-body">
@@ -50,4 +50,10 @@
         </div>
     </div>
 </div>
+</div>
+
+<div *ngIf="existe===false" class="row">
+        <div class="alert alert-info">
+                Tu nutriologo aun no registra su informacion..
+        </div>
 </div>
