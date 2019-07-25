@@ -1,29 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup,FormControl,Validators}from '@angular/forms';
-import { Paciente } from '../../models/paciente.model';
+import {FormGroup,FormControl,Validators, NgForm}from '@angular/forms';
+import { Pacientenew } from '../../models/pacientenew.model';
 import { Usuario } from '../../models/usuario.model';
 import { PacienteService } from '../../services/service.index';
 import { Expediente } from '../../models/expediente.models';
+import { Metas } from '../../models/meta.modelts';
+import { Router ,ActivatedRoute} from '@angular/router';
+
 @Component({
   selector: 'app-addpacientes',
   templateUrl: './addpacientes.component.html',
   styleUrls: ['./addpacientes.component.css']
 })
 export class AddpacientesComponent implements OnInit {
-  pacienteForm: FormGroup;
-  recomendado:any=[
-    'Si','No'
-  ];
-  sexo: any=[
+  usuarioForm: FormGroup;
+  press:boolean=false;
+  g:any="Femenino";
+  genero: any=[
     'Femenino','Masculino'
   ];
   estadosCiviles: any=[
     'Soltero(a)','Casado(a)','Viudo(a)','Union Libre'
   ];
   constructor(
-    public _pacienteService: PacienteService
-  ) { }
-  sonIguales( campo1: string, campo2: string ) {
+    public _pacienteService: PacienteService,
+    public _router: Router,
+    public _activatedRoute: ActivatedRoute
+  ) { 
+   
+  }
+  
+ /* sonIguales( campo1: string, campo2: string ) {
 
     return ( group: FormGroup ) => {
 
@@ -40,35 +47,60 @@ export class AddpacientesComponent implements OnInit {
 
     };
 
-  }
+  }*/
   ngOnInit() {
-    //this.consultarPacientes();
-    this.pacienteForm=new FormGroup({
-      nombre:new FormControl(null, [Validators.required]),
-      app:new FormControl(null, [Validators.required]),
-      apm:new FormControl(null),
-      estadocivil:new FormControl(this.estadosCiviles[0]),
+    this.press=false;
+    this.usuarioForm= new FormGroup({
+      nombre: new FormControl(null,Validators.required),
+      fechaNacimiento: new FormControl(null,Validators.required),
+      estadoCivil:new FormControl(this.estadosCiviles[0]),
       religion:new FormControl(null),
       direccion:new FormControl(null, [Validators.required]),
-      fechanacimiento:new FormControl(),
-      edad:new FormControl({value: '', disabled: true}),
-      motivo:new FormControl(null),
-      medio:new FormControl(null),
-      radio: new FormControl(this.recomendado[0]),
-      quienrecomendo:new FormControl(null),
-      sexo:new FormControl(this.sexo[0]),
-      telefono:new FormControl(null,Validators.required),
-      correo:new FormControl(null, [Validators.required,Validators.email]),
+      genero:new FormControl(this.genero[0]),
+      telefono:new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.pattern('[0-9]{10}')
+        
+      ])),
+      residencia:new FormControl(null,Validators.required),
+      ocupacion:new FormControl(null,Validators.required)
+      /*correo:new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}')
+      ])),
       password:new FormControl(null, Validators.required),
       password2:new FormControl(null, Validators.required),
-      },   { validators: this.sonIguales( 'password', 'password2' )  } );
+      },   { validators: this.sonIguales( 'password', 'password2' )  */} );
+    
+    
     }
-  registrar(){
-    if(this.pacienteForm.invalid){
+  registrar(formValue: any ){
+    this.press=true;
+    console.log();
+    console.log(formValue.value);
+    //console.log(formValue.controls.correo.valid);
+    //console.log(formValue.controls.telefono.valid);
+    if(this.usuarioForm.valid){
+      let pacientenew = new Pacientenew();
+      pacientenew = formValue;
+      var variable:any="N:15"
+      console.log(pacientenew);
+      this._router.navigate(['/historia',variable]);
+    }else{
+     
+      
+      //console.log(pacientenew);
+      console.log("invalido");
+    }
+   /* if(this.usuarioForm.invalid){
+
       swal('Alto', 'Debes completar los campos requeridos', 'warning');
       return;
+    }else{
+      let paciente = new Pacientenew();
+      console.log("si",paciente);
     }
-    
+   /* 
     var userid = localStorage.getItem('id');
     var f = new Date();
     
@@ -109,15 +141,29 @@ export class AddpacientesComponent implements OnInit {
        
       );
         this._pacienteService.crearPaciente(paciente)
-        .subscribe( )
+        .subscribe( resp=>{
+          console.log("NUEVO USUARIO",resp.paciente._id);
+          let meta = new Metas(
+       
+          );
+          meta.paciente=resp.paciente._id;
+          this._pacienteService.crearMetas(meta)
+            .subscribe(resp=>{
+              console.log("NUEVA META",resp);
+            });
+        })
           
-      });
+      });*/
  
    }
-
-
+  
+   cambio(){
+     var sexo:any = document.getElementById("genero");
+     this.g = sexo.value;
+    console.log(this.g);
+  }
   calcularEdad() {
-    var edad;
+    /*var edad;
     var hoy = new Date();
      if (this.pacienteForm.value.fechanacimiento == null){
      
@@ -137,6 +183,6 @@ export class AddpacientesComponent implements OnInit {
     return edad;
     
   }
-  //console.log("entro");
+  //console.log("entro");*/
 }
 }

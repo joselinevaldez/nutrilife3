@@ -1,112 +1,182 @@
 <div *ngIf="usuario.role==='NUTRIOLOGO_ROLE'"class="row" id="contenedor">
-  <div class="col-12">
-      <div id="contenedor" class="card">
-          <div id="contenedor" class="card-body">
-                <section id="contenedor" class="statistic statistic2">
-              <div id="contenedor" class="container">
-                  <div class="row">
-                      <div class="col-md-6 col-lg-3 ">
-                          <div  class="statistic__item statistic__item--green">
-                              <h2 class="number">{{ numPacientes }}</h2>
-                              <span class="desc">Pacientes</span>
-                              <div class="icon">
-                                  <i class="mdi mdi-account"></i>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-6 col-lg-3">
-                          <div  class="statistic__item statistic__item--purple">
-                              <h2 class="number">{{ numAlimentos }}</h2>
-                              <span class="desc">Alimentos</span>
-                              <div class="icon">
-                                  <i class="mdi mdi-food-apple"></i>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-6 col-lg-3">
-                          <div  class="statistic__item statistic__item--blue">
-                              <h2 class="number">{{ numPlatillos }}</h2>
-                              <span class="desc">Platillos</span>
-                              <div class="icon">
-                                  <i class="mdi mdi-silverware-variant"></i>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-6 col-lg-3">
-                          <div  class="statistic__item statistic__item--red">
-                              <h2 class="number">{{numDietas}}</h2>
-                              <span class="desc">Dietas</span>
-                              <div class="icon">
-                                  <i class="mdi mdi-food-variant"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </section>
-           
-         <!--  <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th hidden="hidden">id</th>
-                            <th>Nombre del paciente</th>
-                            <th>Telefono</th>
-                            <th>Fecha y hora</th>
-                            <th>Estado de la cita</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td hidden="hidden"></td>
-                            
-                            <td>Joseline Valdez Gastelum</td>
-                            <td>6682414321</td>
-                            <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
-                            <td>
-                                <div class="label label-table label-warning">Pendiente</div>
-                            </td>
-                            <td>
-                                <button id="botonsito"  title="Preciona para cancelar la cita" class="btn btn-danger btn-circle"><i class="fa fa-remove"></i></button>
-                                <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-circle"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
-                                                                 
-                            </td>
-                        </tr>
-                        <tr>
-                                <td hidden="hidden"></td>
-                                
-                                <td>Joseline Valdez Gastelum</td>
-                                <td>6682414321</td>
-                                <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
-                                <td>
-                                    <div class="label label-table label-danger">Cancelada</div>
-                                </td>
-                                <td>
-                                    <button id="botonsito"  title="Preciona para reactivar la cita" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
-                                    <button id="botonsito" title="Preciona para comenzar la cita" class="btn btn-primary btn-circle"><i class="mdi mdi-arrow-right-drop-circle"></i></button>
-                                                                     
-                                </td>
-                            </tr>
-                        <tr>
-                                <td hidden="hidden"></td>
-                                <td>JVG-0214</td>
-                                <td>Joseline Valdez Gastelum</td>
-                                <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 16, 2017</span> </td>
-                                <td>
-                                    <div class="label label-table label-success">Terminada</div>
-                                </td>
-                                <td>
-                                                                        
-                                </td>
-                            </tr>
-                        
-                    </tbody>
-                </table>
-            </div>-->
-          </div>
-        </div>
+  
+      <div class="row col-12">
+            <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round align-self-center round-success"><i class="ti-user"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <h3 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ numPacientes }} Pacientes</font></font></h3>
+                            <h5 class="text-muted m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Activos</font></font></h5></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round align-self-center round-info"><i class="mdi mdi-food-variant"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <h3 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ numDietas }} Planes Alimenticios</font></font></h3>
+                            <h5 class="text-muted m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Activos</font></font></h5></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="round align-self-center round-primary"><i class="ti-calendar"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h3 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">20 Citas</font></font></h3>
+                                <h5 class="text-muted m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">El dia de hoy</font></font></h5></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
       </div>
+ 
+       
+       
+    
+    <div class="row col-lg-12">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                               <div class="row col-lg-12">
+                                 <div class="col-lg-9">
+                                    <h3 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pacientes en espera</font></font></h3>
+                                    <label class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lista de pacientes en espera</font></font></label>
+                                  </div>
+                                  <div class="col-lg-3" align="right">
+                                        <button class="btn btn-info btn-circle" (click)="modal(agregar);"><i class="mdi mdi-plus" data-placement="left" data-toggle="tooltip" title="" data-original-title="Agregar paciente a la espera"></i></button>
+                                       
+                                  </div>
+                                </div>
+                                <div class="col-1g-12"><br>
+                                    
+                                    <div class="row col-12" style="border-left: 2px solid rgb(164, 164, 233);">
+                                        <div class="col-lg-2"  >
+                                                <br><h4 >8:40 AM</h4>
+                                                <h6 >Llegada</h6>
+                                                   </div>
+                                        <div class="col-lg-2">
+                                                <img align="center" class="img-circle w40" src="../../../assets/images/consulta/femenino2.PNG">
+                                 
+                                            </div>
+                                            <div class="col-lg-5">
+                                                    <h4>Joseline Valdez Gastelum</h4>
+                                                    <h6><i class="mdi mdi-clock text-info"></i> Hora cita 9:00 AM</h6>
+                                                    <h6><i class="mdi mdi-calendar text-info"></i> Consulta Anterior 19/02/2019 9:40 AM</h6>
+                                                </div>
+                                                <div class="col-lg-3"><br>
+                                                <select class="form-control custom-select">
+                                                    <option>Opciones</option>
+                                                </select>
+                                             </div>
+                                    </div>
+                                    <br>
+                                    <div class="row col-12" style="border-left: 2px solid rgb(164, 164, 233);">
+                                        <div class="col-lg-2"  >
+                                                <br><h4 >8:40 AM</h4>
+                                                <h6 >Llegada</h6>
+                                                   </div>
+                                        <div class="col-lg-2">
+                                                <img align="center" class="img-circle w40" src="../../../assets/images/consulta/femenino2.PNG">
+                                 
+                                            </div>
+                                            <div class="col-lg-5">
+                                                    <h4>Joseline Valdez Gastelum</h4>
+                                                    <h6><i class="mdi mdi-clock text-info"></i> Hora cita 9:00 AM</h6>
+                                                    <h6><i class="mdi mdi-calendar text-info"></i> Consulta Anterior 19/02/2019 9:40 AM</h6>
+                                                </div>
+                                                <div class="col-lg-3"><br>
+                                                <select class="form-control custom-select">
+                                                    <option>Opciones</option>
+                                                </select>
+                                             </div>
+                                    </div>
+                                </div>
+                                
+                                
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                   <div class="row col-lg-12">
+                                     <div class="col-lg-9">
+                                        <h3 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Citas del dia</font></font></h3>
+                                        <label class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-calendar"></i> 14/02/1997</font></font></label>
+                                      </div>
+                                      <div class="col-lg-3" align="right">
+                                            <a class="btn btn-info btn-circle" [routerLink]="['/calendario']" ><i class="mdi mdi-calendar text-white" data-placement="left" data-toggle="tooltip" title="" data-original-title="Ver el calendario"></i></a>
+                                           
+                                      </div>
+                                    </div>
+                                    <div class="col-1g-12"><br>
+                                       
+                                        <table class="table table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col" hidden="hidden">#</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Hora</th>
+                                                    <th scope="col"></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr style="border-left: 2px solid rgb(129, 240, 129);">
+                                                    <th hidden="hidden">1</th>
+                                                    <td>Joseline Valdez</td>
+                                                    <td>9:00 AM</td>
+                                                    <td>
+                                                        <select class="form-control custom-select">
+                                                            <option>Accion</option>
+                                                        </select>
+                                                    </td>
+                                                  </tr>
+                                                  <tr style="border-left: 2px solid rgb(235, 129, 129);">
+                                                        <th hidden="hidden">1</th>
+                                                        <td>Joseline Valdez</td>
+                                                        <td>9:00 AM</td>
+                                                        <td>
+                                                            <select class="form-control custom-select">
+                                                                <option>Accion</option>
+                                                            </select>
+                                                        </td>
+                                                      </tr>
+                                                </tbody>
+                                        </table>
+                                        <br>
+                                        <div class="row col-lg-12">
+                                                <div class="row col-lg-6">
+                                                        
+                                                            <span align="center"  class="label label-info text-info">0</span>
+                                                        
+                                                       
+                                                            &nbsp;<h6 align="center">Sin confirmar</h6>
+                                                        
+                                                </div>
+                                                <div class="row col-lg-6">
+                                                      
+                                                            <span align="center"  class="label label-success text-success">0</span>
+
+                                                            &nbsp;<h6 align="center">Confirmada</h6>
+                                                       
+                                                </div>
+                                               
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+                        </div>
+                </div>
+            </div>
 </div>
 
 <div *ngIf="usuario.role==='PACIENTE_ROLE'"class="col-12" id="contenedor">
@@ -127,7 +197,7 @@
                                                     <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso.png"></div>
                                                     <div class="align-self-center">
                                                         <h6 class="text-muted m-t-10 m-b-0">Peso incial</h6>
-                                                        <h2 class="m-t-0">{{peso}} kg</h2></div>
+                                                        <h2 *ngIf="peso!=''" class="m-t-0">{{peso}} kg</h2></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,7 +209,7 @@
                                                         <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_actual.png"></div>
                                                     <div class="align-self-center">
                                                         <h6 class="text-muted m-t-10 m-b-0">Peso Actual</h6>
-                                                        <h2 class="m-t-0">{{pesoA}} kg</h2></div>
+                                                        <h2 *ngIf="pesoA!=''"class="m-t-0">{{pesoA}} kg</h2></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,10 +218,16 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex no-block">
-                                                        <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_bajado.png"></div>
+                                                        <div *ngIf="estadopeso==='subio'"class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_subido.png"></div>
+                                                        <div *ngIf="estadopeso==='bajo'"class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_bajado.png"></div>
+                                                        <div *ngIf="estadopeso==='igual'"class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img class="w20"alt="Income" src="../../../assets/alimentos/peso_igual.png"></div>
                                                     <div class="align-self-center">
-                                                        <h6 class="text-muted m-t-10 m-b-0">Peso bajado</h6>
-                                                        <h2 class="m-t-0">{{pesoB}} kg</h2></div>
+                                                        <h6 *ngIf="estadopeso==='subio'" class="text-muted m-t-10 m-b-0">Peso Subido</h6>
+                                                        <h6 *ngIf="estadopeso==='bajo'" class="text-muted m-t-10 m-b-0">Peso Bajado</h6>
+                                                        <h6 *ngIf="estadopeso==='igual'" class="text-muted m-t-10 m-b-0">Mismo Peso</h6>
+                                                      
+                                                      
+                                                        <h2 class="m-t-0">{{infopeso}}</h2></div>
                                                 </div>
                                             </div>
                                         
@@ -162,3 +238,28 @@
             </div>
 
 </div>
+
+<ng-template #agregar let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Paciente a la espera</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cancelar()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            
+        <div  class="modal-body">
+             <div class="row col-lg-12">
+                 <div class="col-lg-6">
+                        <button  class="active btn btn-outline-info col-lg-12" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Seleccionar paciente</font></font></button>
+                 </div>
+                 <div class="col-lg-6">
+                        <button  class="btn btn btn-outline-info col-lg-12 " ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Confirmar</font></font></button>
+                </div>
+             </div>
+        </div>
+        
+        <div class="modal-footer">
+            
+        </div>
+     
+      </ng-template>

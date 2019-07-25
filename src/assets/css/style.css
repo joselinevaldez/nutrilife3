@@ -67,7 +67,7 @@ body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   overflow-x: hidden;
-  color: #67757c;
+  color: #3d3d3d;
   font-weight: 300; }
 
 html {
@@ -499,7 +499,7 @@ html body .bg-light-primary {
   background-color: #f1effd; }
 
 html body .bg-light-success {
-  background-color: #e8fdeb; }
+  background-color: #d9ffde; }
 
 html body .bg-light-info {
   background-color: #cfecfe; }
@@ -508,10 +508,10 @@ html body .bg-light-extra {
   background-color: #ebf3f5; }
 
 html body .bg-light-warning {
-  background-color: #fff8ec; }
+  background-color: #ffebc8; }
 
 html body .bg-light-danger {
-  background-color: #f9e7eb; }
+  background-color: #ffd2dc; }
 
 html body .bg-light-inverse {
   background-color: #f6f6f6; }

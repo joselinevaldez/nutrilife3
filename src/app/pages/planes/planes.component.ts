@@ -33,15 +33,16 @@ cabeceras:any=[
 dieta:any[]=[];
  
 c:string;
-
+alert:boolean=false;
 dias:any=[
   "domingo","lunes","martes","miercoles","jueves","viernes","sabado"
 ];
-
+nombreSelect:string;
 filas:any=[];
 platillo:Platillo[]=[];
 alimentosp:Alimentosp[]=[];
 dietaM:Dieta=new Dieta();
+platilloselect:string;
 total = this.cabeceras.length-1;
   constructor(
     public _platillosService:PlatillosService,
@@ -220,5 +221,47 @@ crearPlanAlimenticio(planes:NgForm){
   }else{
     swal("Alto","Debes crear la dieta correctamente","warning");
   }
+}
+modalbuscar(modal,nombre:any){
+  this.nombreSelect=nombre;
+  console.log("NOMBRE",nombre);
+  this.modalService.open(modal);
+
+}
+seleccionar(p:any,modal:any){
+  
+  console.log(p);
+  var selector:any = document.getElementById(this.nombreSelect);
+  selector.value=p._id;
+  //this.platilloselect=p._id;
+  this.alert=true;
+  //console.log("alimentos",this.alimentos);
+ 
+
+  //var select:any = document.getElementById("alimento"); //El <select>
+  //select.options[this.select.selectedIndex].value=this.alimento; //El texto de la opción seleccionada
+ 
+  //var alimento = select.options[this.select.selectedIndex].text; //El texto de la opción seleccionada
+  
+}
+cancelar(){
+  this.alert=false;
+  //this.consultarPlatillos();
+}
+
+buscarPlatillo(termino:string){
+  if (termino.length <= 0){
+    this.consultarPlatillos();
+    return;
+  }
+  console.log(termino);
+   
+  ///
+  this._platillosService.buscarPlatillo(termino)
+    .subscribe( (platillo:any)=>{
+      this.platillo=platillo;
+      //console.log(this.paciente);
+    });
+    //console.log("arreglo",this.paciente.length);
 }
 }

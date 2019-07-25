@@ -1,30 +1,23 @@
 export class Paciente {
     constructor(
         public nombre?: string,
-        public app?: string,
-        public apm?:string,
-        public estadocivil?: string,
+        public estadoCivil?: string,
         public religion?: string, 
         public direccion?: string, 
-        public fechanacimiento?: Date,
-        public edad?:number,
-        public motivo?: string, 
-        public recomendado?: string,
-        public medio?: string, 
+        public fechaNacimiento?: Date,
         public sexo?: string,
         public telefono?: string,
+        public ocupacion?: string,
         public estatus?:string,
-        public fechaAlta?:string,
+        public fechaAlta?:Date,
+        public fechaBaja?:Date,
+        public ultimaModificacion?:string,
         public nutriologo?:string, 
         public user?:string,
         public password?:string,
         public email?:string,
-        public role?:string,
-        public quienrecomendo?: string, 
-        public expediente?:string, 
-        public usuario?: string,  
         public _id?:string,
-        public fechaBaja?:Date,
+        
     ){}
 
 }

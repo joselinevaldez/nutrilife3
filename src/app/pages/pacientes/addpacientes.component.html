@@ -1,0 +1,140 @@
+
+<div class="row col-lg-12">
+    <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <img *ngIf="g=='Femenino'"  class="centro " src="../../../assets/images/consulta/femenino2.PNG">
+                    <img *ngIf="g=='Masculino'" class="centro " src="../../../assets/images/consulta/masculino2.PNG">         
+                    <h4 align="center" class="card-title m-t-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Paciente Nuevo</font></font></h4>
+                    <h6 align="center" class="card-subtitle"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-calendar">14/02/2019</i></font></font></h6>
+                </div>
+            </div>
+    </div>
+                          
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-body"> 
+                <form ngNativeValidate [formGroup]="usuarioForm">
+                    <div class="col-md-12">
+                            <h3>Datos personales</h3>
+                            <hr>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label class="control-label"><span class="text-info">* </span>Nombre Completo</label>
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-account"></i></div>
+                                    <input  formControlName="nombre" name="nombre" type="text"  class="form-control"  >
+                                </div>
+                                <p *ngIf="usuarioForm.controls.nombre.invalid && !usuarioForm.controls.nombre.pristine || usuarioForm.controls.nombre.invalid && press==true" class="text text-danger">El nombre es requerido <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                </div>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="row col-lg-12">     
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label"><span class="text-info">* </span>Fecha de nacimiento</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-calendar"></i></div>
+                                <input  formControlName="fechaNacimiento" name="fechaNacimiento"type="date" class="form-control" placeholder="dd/mm/aaaa">
+                                </div>
+                                <p *ngIf="usuarioForm.controls.fechaNacimiento.invalid && !usuarioForm.controls.fechaNacimiento.pristine || usuarioForm.controls.fechaNacimiento.invalid && press==true" class="text text-danger">La fecha de nacimiento es requerida <i class="fa fa-exclamation-circle uncheck"></i></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"><span class="text-info">* </span>Genero</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="mdi mdi-human-male-female "></i></div>
+                                        <select  formControlName="sexo" (change)="cambio();"  name="sexo" id="sexo" class="form-control custom-select">
+                                                <option *ngFor="let g of genero" value="{{g}}">{{g}}</option>
+                                                
+                                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <div class="row col-lg-12">     
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Religion</label>
+                                        
+                                        <div class="input-group">
+                                        <div class="input-group-addon"><i class="mdi mdi-church"></i></div>
+                                            <input  formControlName="religion" name="religion"type="text" class="form-control">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label class="control-label"><span class="text-info">* </span>Estado civil</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-account"></i></div>
+                                            <select  formControlName="estadoCivil" name="estadoCivil"  class="form-control custom-select">
+                                                <option *ngFor="let e of estadosCiviles" value="{{e}}">{{e}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label"><span class="text-info">* </span>Pais de residencia</label>
+                                        <div class="input-group">
+                                        <div class="input-group-addon"><i class="mdi mdi-flag-variant"></i></div>
+                                            <input  formControlName="residencia" name="residencia" type="text"  class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label"><span class="text-info">* </span>Direccion</label>
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-map-marker"></i></div>
+                                        <input  formControlName="direccion" name="direccion"type="text"  class="form-control" >
+                                    </div>
+                                    <p *ngIf="usuarioForm.controls.direccion.invalid && !usuarioForm.controls.direccion.pristine || usuarioForm.controls.direccion.invalid && press==true" class="text text-danger">La direccion es requerida <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-lg-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Ocupacion</label>
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-clipboard-account"></i></div>
+                                        <input   formControlName="ocupacion" name="residencia" type="text"  class="form-control"  >
+                                    </div>
+                                    <p *ngIf="usuarioForm.controls.ocupacion.invalid && !usuarioForm.controls.ocupacion.pristine || usuarioForm.controls.ocupacion.invalid && press==true" class="text text-danger">La ocupacion es requerida <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label"><span class="text-info">* </span>Telefono</label>
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-phone"></i></div>
+                                        <input  formControlName="telefono"  name="telefono"type="text"  class="form-control" >
+                                    </div>
+                                    <p *ngIf="usuarioForm.controls.telefono.invalid && !usuarioForm.controls.telefono.pristine || usuarioForm.controls.telefono.invalid && press==true" class="text text-danger">El telefono debe contener 10 numeros <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                
+                
+
+                    <div class="form-actions col-md-12" id="botones_centrar">
+                        <a (click)="registrar(usuarioForm.value)" class="btn btn-outline-info btn-g"> <i class="fa fa-close  icon"></i>Cancelar </a>&nbsp;    
+                        <a (click)="registrar(usuarioForm.value)" class="btn btn-outline-info btn-g"> <i class="fa fa-save  icon" ></i> Guardar</a>&nbsp;    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

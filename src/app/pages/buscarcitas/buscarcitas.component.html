@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <h3 class="card-title">Filtrar Citas por fecha </h3>
+                <div class="row">
+                    <div class="col-5">
+                        <label for="">De</label>
+                        <input #fechainicio type="date" [(ngModel)]="busquedaFechaDe" class="form-control">
+
+                    </div>
+                    <div class="col-5">
+                        <label for="">Hasta</label>
+                        <input #fechafin type="date"  [(ngModel)]="busquedaFechaHasta" class="form-control">
+
+                    </div>
+                    <div class="col-2">
+                        <br>
+                        <button class="btn btn-success waves-effect waves-light m-r-10" type="submit" (click)="cargarcitas()">
+                            <i class="fa fa-search"></i> Buscar
+                        </button>
+                    </div>
+                    
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+            <div *ngIf="citas.length>0"  class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Citas</h3>
+                       <div id="tablaPacientes" class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Nombre</th>
+                                    <th>Ap. Paterno</th>
+                                    <th>Ap. Materno</th>
+                                    <th>Estatus</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let c of citas">
+                                    
+                                    <td>{{c.start |fecha:10}}</td>
+                                    <td>{{c.time}}</td>
+                                    <td>{{c.paciente.nombre}}</td>
+                                    <td>{{c.paciente.app}}</td>
+                                    <td>{{c.paciente.apm}}</td>
+                                    
+                                    <td> 
+                                    <span *ngIf="c.estatus=='1'" class="label label-success">Realizada</span>
+                                    <span *ngIf="c.estatus=='0'" class="label label-danger">Cancelada</span>
+                                    <span *ngIf="c.estatus=='2'" class="label label-warning">Pendiente</span>
+                                    </td>
+                     
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                                           
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="citas.length==0" class="col-12">
+                    <div class="alert alert-info">
+                        No se encontro ninguna cita..
+                    </div>
+                </div>
+        </div>

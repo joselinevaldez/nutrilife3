@@ -2,11 +2,15 @@ import { Component, OnInit,ViewChild ,ViewEncapsulation } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { NgbModal,NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgSelectComponent}from '@ng-select/ng-select';
 import { EventService, PacienteService } from '../../services/service.index';
 import { Paciente } from '../../models/paciente.model';
+
 import { Cita } from '../../models/cita.models';
 import { NgForm } from '@angular/forms';
+declare var jQuery:any;
+declare var $:any;
+
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -33,6 +37,11 @@ export class CalendarioComponent implements OnInit {
   calendarOptions: Options;
   displayEvent: any;
   events = null;
+  alert:boolean=false;
+  options=[
+    "uno","dos","tres"
+  ]
+  
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   constructor(
     private _pacienteService: PacienteService,
@@ -47,8 +56,10 @@ export class CalendarioComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' });
     this.limpiar();
   }//
+
+    
   ngOnInit() {
-   
+    jQuery('select').selectpicker();
     this.getPacientes();
     this.calendarOptions = {
       editable: true,
@@ -147,10 +158,35 @@ export class CalendarioComponent implements OnInit {
     this.cita.start=null;
     this.cita.time='';
   }
- /* abrirModal(modal){
-    this.modalService.open(modal, { size: 'sm' });
+  modalbuscar(modal){
+    this.modalService.open(modal);
  
-  }*/
+  }
+
+  buscarPaciente(termino:string){
+    if (termino.length <= 0){
+      this.getPacientes();
+      return;
+    }
+    console.log(termino);
+     
+    ///
+    this._pacienteService.buscarPaciente(termino)
+      .subscribe( (pacientes)=>{
+        this.pacientes=pacientes;
+        //console.log(this.paciente);
+      });
+      //console.log("arreglo",this.paciente.length);
+  }
+  seleccionar(p:any,modal:any){
+    console.log(p);
+    this.cita.paciente=p._id;
+    this.alert=true;
+    
+  }
+  cancelar(){
+    this.alert=false;
+  }
   /*
   updateEvent(model: any) {
     alert("entroAqui");

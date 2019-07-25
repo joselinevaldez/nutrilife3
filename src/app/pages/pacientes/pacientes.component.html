@@ -1,11 +1,53 @@
+
 <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row center">
+                            <div class="col-lg-2 ">
+                                    <a  class="btn btn-outline-info btn-g"> <i class="fa  fa-plus icon"></i> Nuevo Paciente</a>&nbsp;               
+                            </div>
+                            <div class="col-lg-2">
+                                    <a  class="btn btn-outline-info btn-g"> <i class="fa  fa-file-excel-o icon"></i> Exportar Excel </a>&nbsp;    
+                                       
+                            </div>
+                            <div class="col-lg-2">
+                                    <a  class="btn btn-outline-info btn-g"> <i class="fa  fa-file-pdf-o"></i> Exportar Pdf </a>&nbsp;    
+                                       
+                            </div>
+                               
+                        </div>
                         <div class="row">
-                         <div class="col-12">
-                        <input #input (keyup)="buscarPaciente( input.value)" type="text" class="form-control" placeholder="Buscar ...">
-                         </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <b><label class="control-label">Buscar</label></b>
+                                    <input #input (keyup)="buscarPaciente( input.value)" type="search" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <b><label class="control-label">Estatus</label></b>
+                                    <select #select class="form-control custom-select" (change)="buscarPacienteEstatus( select.value)" >
+                                        <option value='1'>Activos</option>
+                                        <option value='0'>Inactivos</option>
+                                        
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <b><label class="control-label">Fecha desde</label></b>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <b><label class="control-label">Fecha hasta</label></b>
+                                    <input type="date" class="form-control">
+                                </div>
+
+                            </div>
                     
                         </div>
                     </div>
@@ -17,55 +59,39 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="card-title">Pacientes Registrados (<small>{{ totalRegistro }}</small>)</h3>
-                               <div id="tablaPacientes" class="table-responsive">
-                                <table class="table table-hover">
+                              
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                              
                                     <thead>
                                         <tr>
                                             <th hidden="hidden">Id</th>
-                                            <th>Imagen</th>
                                             <th>Nombre</th>
-                                            <th>Ap. Paterno</th>
-                                            <th>Ap. Materno</th>
                                             <th>Teléfono</th>
+                                            <th>Fecha de Nacimiento</th>
                                             <th>Fecha Ingreso</th>
-                                            
                                             <th>Estatus</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let p of paciente">
+                                        <tr *ngFor="let p of paciente" >
                                             <td hidden="hidden">{{p._id}}</td>
-                                            <td>
-                                          <ng-template #popContent><img class="img-circle w150"  alt="user" [src]="p.usuario.img | imagen "> 
-                                          </ng-template>
-                                           <button class="transparente" triggers="mouseenter:mouseleave" placement="right"
-                                           [ngbPopover]="popContent">
-                                     <img class="img-circle w20"  alt="user" [src]="p.usuario.img | imagen "> 
-                                            
-                                                
-                                           </button>
-                                            
-
-                                            </td>
+                                           
                                             <td>{{p.nombre}}</td>
-                                            <td>{{p.app}}</td>
-                                            <td>{{p.apm}}</td>
+                                            
                                             <td>{{p.telefono}}</td>
-                                            <td><span class="text-muted"><i class="fa fa-clock-o"></i> {{p.fechaAlta | fecha:10}} </span></td>
+                                            <td><span class="text-muted"> {{p.fechaNacimiento | fecha:10}} <i *ngIf="p.fechaNacimiento | fecha:10 === fecha_actual" class="mdi mdi-cake text-primary"></i> </span></td>
+                                           
+                                            <td><span class="text-muted"> {{p.fechaAlta | fecha:10}} </span></td>
                                             <td> 
                                             <span *ngIf="p.estatus=='1'" class="label label-success">Activo</span>
                                             <span *ngIf="p.estatus=='0'" class="label label-danger">Inactivo</span>
                                             </td>
                                             <td>
-                                                    <button id="botonsito" (click)="editarModal(p,editar)"  ngbPopover="Preciona para editar la informacion del paciente" triggers="mouseenter:mouseleave" popoverTitle="Editar" class="btn btn-info btn-circle"><i class="mdi mdi-account-edit"></i></button>
+                                                    <button id="botonsito" routerLink="/verpaciente/{{p._id}}"  ngbPopover="Preciona para editar la informacion del paciente" triggers="mouseenter:mouseleave" popoverTitle="Editar" class="btn btn-info btn-circle"><i class="mdi mdi-account-edit"></i></button>
                                                     <button  *ngIf="p.estatus=='1'" id="botonsito" (click)="desactivar(p)"  ngbPopover="Preciona para desactivar al paciente" triggers="mouseenter:mouseleave" popoverTitle="Desactivar" class="btn btn-danger btn-circle"><i class="mdi mdi-account-off"></i></button>
-                                                    <button *ngIf="p.estatus=='0'" id="botonsito" (click)="reactivar(p)" ngbPopover="Preciona para reactivar al paciente" triggers="mouseenter:mouseleave" popoverTitle="Reactivar" class="btn btn-success btn-circle"><i class="mdi mdi-account-check"></i></button>
-                                                 
-                                                    <button id="botonsito"  (click)="expedienteModal(expediente,p)"title="Expediente" class="btn btn-warning btn-circle"><i class="mdi mdi-folder-account"></i></button>
-                                                    <button id="botonsito"  (click)="dietaModal(dieta,p)"title="Asignar dieta" class="btn btn-primary btn-circle"><i class="mdi mdi-food-apple"></i></button>
-                                                  
-                                                        
+                                                    <button *ngIf="p.estatus=='0'" id="botonsito" (click)="reactivar(p)" ngbPopover="Preciona para reactivar al paciente" triggers="mouseenter:mouseleave" popoverTitle="Reactivar" class="btn btn-success btn-circle"><i class="mdi mdi-account-check"></i></button>                                                       
                                                           
 
                                             </td>
@@ -85,6 +111,7 @@
                             No se encontro ningun paciente..
                         </div>
                     </div>
+                    
                 </div>
  <!--<ng-template #nuevoCliente let-modal>
     <div class="modal-header">
@@ -326,11 +353,14 @@
 
                     <div class="form-group">
                             <label>Dieta:</label>
-                            <select  name="dieta" ngModel class="form-control custom-select" required>
-                                <option  *ngFor="let d of dietas" value="{{d._id}}">({{d.tipopersona}}) {{d.nombre}}</option>
-                                                              
-                            </select>
-                            </div>
+                            <div class="input-group">
+                                <select  name="dieta" ngModel value="{{dietaselect}}"class="form-control custom-select" required>
+                                    <option  *ngFor="let d of dietas" value="{{d._id}}">({{d.tipopersona}}) {{d.nombre}}</option>
+                                                                
+                                </select>
+                                <button class="btn btn-info" (click)="modalbuscar(buscar)"><i class="fa fa-search"></i></button>
+                            </div>     
+                    </div>
             </div>
         
         <div class="modal-footer">
@@ -347,8 +377,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
              </div>
-             <form #expediente ngNativeValidate (ngSubmit)="actualizarExpediente(expediente)">
-       
+            
              <div class="modal-body">
                     <div class="card">
                             <!-- Nav tabs -->
@@ -356,12 +385,210 @@
                                 <li id="letra"class="nav-item"> <a class="nav-link active" role="tab" aria-expanded="true" href="#home" data-toggle="tab">Exploracion</a> </li>
            
                                 <li id="letra"class="nav-item"> <a class="nav-link" role="tab" aria-expanded="false" href="#medidas" data-toggle="tab">Medidas</a> </li>
+                                <li id="letra"class="nav-item"> <a class="nav-link" role="tab" aria-expanded="false" href="#metas" data-toggle="tab">Metas</a> </li>
                               
                             </ul>
                             <!-- Tab panes -->
                           
                             <div class="tab-content">
+                                    <div class="tab-pane " id="metas" role="tabpanel" aria-expanded="true">
+                                        <form #metaform ngNativeValidate (ngSubmit)="actualizarMetas(metaform)">   
+                                        
+                                            <div *ngIf="mostrarmeta===true"  class="card-body">
+                                                
+                                                
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="control-label text-lefth col-md-2">Peso (kg)</label>
+                                                                   <div class="col-3">
+                                                                        <div class="switch">
+                                                                                <label>
+                                                                                  No
+                                                                                  <input name="peso" id="peso" [checked]="m.peso"   (click)="metas('peso','pesometa','pesokg');cambiar('peso');"  type="checkbox">
+                                                                                  <span class="lever"></span>
+                                                                                  Fijar
+                                                                                </label>
+                                                                              </div>
+                                                                   </div>
+                                                                   <div class="col-md-3">
+                                                                       <select id="pesometa" [(ngModel)]="m.pesometa" name="pesometa"  class="form-control custom-select">
+                                                                            <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                                            
+                                                                       </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                    <label>Hasta</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input id="pesokg" [(ngModel)]="m.pesokg" name="pesokg" class="form-control" type="number">
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Kg</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="control-label text-lefth col-md-2">Cintura (cm)</label>
+                                                                   <div class="col-3">
+                                                                        <div class="switch">
+                                                                                <label>
+                                                                                  No
+                                                                                  <input id="cintura" [checked]="m.cintura" (click)="metas('cintura','cinturameta','cinturacm');cambiar('cintura');"  type="checkbox">
+                                                                                  <span class="lever"></span>
+                                                                                  Fijar
+                                                                                </label>
+                                                                              </div>
+                                                                   </div>
+                                                                   <div class="col-md-3">
+                                                                       <select id="cinturameta" [(ngModel)]="m.cinturameta" name="cinturameta" class="form-control custom-select">
+                                                                            <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                                       
+                                                                       </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Hasta</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input id="cinturacm" [(ngModel)]="m.cinturacm" name="cinturacm"  class="form-control" type="number">
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Cm</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                   
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="control-label text-lefth col-md-2">Abdomen (cm)</label>
+                                                                   <div class="col-3">
+                                                                        <div class="switch">
+                                                                                <label>
+                                                                                  No
+                                                                                  <input id="abdomen" [checked]="m.abdomen"  (click)="metas('abdomen','abdomenmeta','abdomencm');cambiar('abdomen');" type="checkbox">
+                                                                                  <span class="lever"></span>
+                                                                                  Fijar
+                                                                                </label>
+                                                                              </div>
+                                                                   </div>
+                                                                   <div class="col-md-3">
+                                                                       <select id="abdomenmeta" [(ngModel)]="m.abdomenmeta" name="abdomenmeta" disabled class="form-control custom-select">
+                                                                            <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                                       
+                                                                       </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Hasta</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input id="abdomencm" [(ngModel)]="m.abdomencm" name="abdomencm" disabled class="form-control" type="number">
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Cm</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+ 
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="control-label text-lefth col-md-2">Gluteo (cm)</label>
+                                                                   <div class="col-3">
+                                                                        <div class="switch">
+                                                                                <label>
+                                                                                  No
+                                                                                  <input id="gluteo" [checked]="m.gluteo" (click)="metas('gluteo','gluteometa','gluteocm');cambiar('gluteo');"  type="checkbox">
+                                                                                  <span class="lever"></span>
+                                                                                  Fijar
+                                                                                </label>
+                                                                              </div>
+                                                                   </div>
+                                                                   <div class="col-md-3">
+                                                                       <select id="gluteometa" [(ngModel)]="m.gluteometa" name="gluteometa" class="form-control custom-select">
+                                                                            <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                                       
+                                                                       </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Hasta</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input id="gluteocm" [(ngModel)]="m.gluteocm" name="gluteocm" class="form-control" type="number">
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Cm</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="control-label text-lefth col-md-2">Brazo (cm)</label>
+                                                                   <div class="col-3">
+                                                                        <div class="switch">
+                                                                                <label>
+                                                                                  No
+                                                                                  <input id="brazo" [checked]="m.brazo"  (click)="metas('brazo','brazometa','brazocm');cambiar('brazo');" type="checkbox">
+                                                                                  <span class="lever"></span>
+                                                                                  Fijar
+                                                                                </label>
+                                                                              </div>
+                                                                   </div>
+                                                                   <div class="col-md-3">
+                                                                       <select id="brazometa" [(ngModel)]="m.brazometa" name="brazometa" class="form-control custom-select">
+                                                                            
+                                                                            
+                                                                            <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                                       
+                                                                       </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Hasta</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input id="brazocm"[(ngModel)]="m.brazocm" name="brazocm" class="form-control" type="number">
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                            <label>Cm</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                   
+                                                </div>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Actualizar Metas</button>
+                                            </div>
+                                           <div *ngIf="mostrarmeta===false" class="card-body">
+                                                <div  class="alert alert-info">
+                                                        Para poder asignarle metas a tu paciente es necesario que registres sus medidas.
+                                                    </div>
+                                           </div>
+                                         
+                                         
+                                           
+                                        
+                                        </form>
+                                        </div>
                                 <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
+                                <form #expediente ngNativeValidate (ngSubmit)="actualizarExpediente(expediente)">
+   
                                     <div class="card-body">
                                         <h5>Antecedentes Patologicos</h5>
                                         <div class="row">
@@ -395,177 +622,462 @@
                                                         </div>
                                                     </div>
                                             </div>                                           
-                                        
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Actualizar</button>
+                   
                                     </div>
+                                </form>
                                 </div>
                                 <!--second tab-->
                                 
                                    
                                         <div class="tab-pane" id="medidas" role="tabpanel" aria-expanded="false">
-                                           <div class="card-body">
-                                               <h5>Medidas</h5>
-                                               <div class="row">
-                                                    <div class="col-md-6">
-                                                    <h6 align="center" class="text-info">Abdomen (cm)</h6>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                        <label class="control-label">Inicial</label>
-                                                                        <input [(ngModel)]="exp.abdomen" name="abdomen" type="number" min="0" required  class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                            <label class="control-label">Actual</label>
-                                                                            <input [(ngModel)]="exp.abdomenA" name="abdomenA" type="number" min="0"(blur)="abdomen()" required class="form-control" >
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                                <label class="control-label">Bajado</label>
-                                                                                <input [(ngModel)]="exp.abdomenB" name="abdomenB"type="number"min="0" disabled class="form-control" >
-                                                                        </div>
-                                                                    </div>
+                                            
+                                        <form #medidaform ngNativeValidate (ngSubmit)="actualizarmedidas(medidaform)">
+   
+                                            <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                        <div class="form-group">
+                                                                <label class="control-label text-info">Cintura (cm)</label>
+                                                                <input [(ngModel)]="exp.cintura" name="cintura" type="number" step="0.1" min="0" required  class="form-control" >
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                            <h6 align="center" class="text-primary">Cintura (cm)</h6>
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                                <label class="control-label">Inicial</label>
-                                                                                <input [(ngModel)]="exp.cintura" name="cintura"type="number"min="0" required class="form-control" >
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                    <label class="control-label">Actual</label>
-                                                                                    <input [(ngModel)]="exp.cinturaA" name="cinturaA" (blur)="cintura()" required type="number"min="0"  class="form-control" >
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                        <label class="control-label">Bajado</label>
-                                                                                        <input [(ngModel)]="exp.cinturaB" name="cinturaB"type="number"min="0" disabled class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                </div>
-                                                    </div>
-                                               </div>
-                                               <div class="row">
-                                                    <div class="col-md-6">
-                                                    <h6 align="center" class="text-danger">Peso (kg)</h6>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                        <label class="control-label">Inicial</label>
-                                                                        <input [(ngModel)]="exp.peso" name="peso"type="number" min="0"required  class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                            <label class="control-label">Actual</label>
-                                                                            <input [(ngModel)]="exp.pesoA" name="pesoA" (blur)="peso()"type="number"min="0" required class="form-control" >
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                                <label class="control-label">Bajado</label>
-                                                                                <input [(ngModel)]="exp.pesoB" name="pesoB"type="number"min="0" disabled class="form-control" >
-                                                                        </div>
-                                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                        <div class="form-group">
+                                                                <label class="control-label text-info">Abdomen (cm)</label>
+                                                                <input [(ngModel)]="exp.abdomen" name="abdomen" type="number" step="0.1" min="0" required    class="form-control" >
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                            <h6 align="center" class="text-warning">% Grasa corporal</h6>
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                                <label class="control-label">Inicial</label>
-                                                                                <input [(ngModel)]="exp.grasacorporal" name="grasacorporal"type="number" min="0"required class="form-control" >
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                    <label class="control-label">Actual</label>
-                                                                                    <input [(ngModel)]="exp.grasacorporalA"(blur)="grasacorporal()" min="0" required name="grasacorporalA"type="number"  class="form-control" >
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                        <label class="control-label">Bajado</label>
-                                                                                        <input [(ngModel)]="exp.grasacorporalB" name="grasacorporalB" type="number" disabled class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                </div>
-                                                    </div>
-                                               </div>
-                                               <div class="row">
-                                                    <div class="col-md-6">
-                                                            <h6 align="center" class="text-success">% Grasa Viceral</h6>
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                                <label class="control-label">Inicial</label>
-                                                                                <input [(ngModel)]="exp.grasaviceral" name="grasaviceral"type="number"min="0"  required class="form-control" >
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                    <label class="control-label">Actual</label>
-                                                                                    <input [(ngModel)]="exp.grasaviceralA" (blur)="grasaviceral()" required min="0" name="grasaviceralA"type="number"  class="form-control" >
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                        <label class="control-label">Bajado</label>
-                                                                                        <input [(ngModel)]="exp.grasaviceralB" name="grasaviceralB"type="number" min="0" disabled class="form-control" >
-                                                                                </div>
-                                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                    <div class="col-md-6">
-                                                    
-                                                            <div class="form-group">
-                                                                <br>
-                                                                    <label class="control-label">Estatura (metros)</label>
-                                                                    <input [(ngModel)]="exp.estatura" name="estatura" type="text"  required class="form-control" >
-                                                            </div>
-                                                    </div>
-                                               </div>
-                                               <div class="row">
-                                                    <div class="col-md-6">
-                                                            <label>IMC</label>
-                                                                <div class="input-group mb-3">
-                                                                                <input [(ngModel)]="exp.imc" name="imc" disabled type="number" min="0" required class="form-control" >
-                                                            
-                                                                                <div class="input-group-append">
-                                                                                  <button (click)="calcularIMC()" class="btn btn-info" type="button"> Calcular</button>
-                                                                                </div>
-                                                                </div>
-                                                            
-                                                    </div>
-                                         
-                                                    <div class="col-md-6">
-                                                    
-                                                            <div class="form-group">
-                                                                        <label class="control-label">Diagnostico de acuerdo a IMC</label>
-                                                                        <input [(ngModel)]="exp.diagnostico" name="diagnostico" disabled type="text"  required class="form-control" >
-                                                                </div>
-                                                    </div>
-                                               </div>
-                                               
-                                           </div>
+                                                </div>
+                                                <div class="col-4">
+                                                        <div class="form-group">
+                                                                <label class="control-label text-info">Peso (kg)</label>
+                                                                <input [(ngModel)]="exp.peso" name="peso" type="number" step="0.1" min="0" required   class="form-control" >
+                                                        </div>
+                                                </div>
                                             </div>
+                                            <div class="row">
+                                                    <div class="col-4">
+                                                            <div class="form-group">
+                                                                    <label class="control-label text-info">Cadera (cm)</label>
+                                                                    <input [(ngModel)]="exp.cadera" name="cadera" type="number" step="0.1" min="0" required    class="form-control" >
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                            <div class="form-group">
+                                                                    <label class="control-label text-info">Brazo (cm)</label>
+                                                                    <input [(ngModel)]="exp.brazo" name="brazo" type="number" step="0.1" min="0" required    class="form-control" >
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                            <div class="form-group">
+                                                                    <label class="control-label text-info">Muslo (cm)</label>
+                                                                    <input  [(ngModel)]="exp.muslo" name="muslo" type="number" step="0.1" min="0" required    class="form-control" >
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-4">
+                                                                <div class="form-group">
+                                                                        <label class="control-label text-info">%Grasa corporal </label>
+                                                                        <input  [(ngModel)]="exp.grasacorporal" name="grasacorporal" type="number" step="0.1" min="0" required    class="form-control" >
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                                <div class="form-group">
+                                                                        <label class="control-label text-info">%Grasa viceral</label>
+                                                                        <input [(ngModel)]="exp.grasaviceral" name="grasaviceral" type="number" step="0.1" min="0" required    class="form-control" >
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                                <div class="form-group">
+                                                                        <label class="control-label text-info">Estatura (metros)</label>
+                                                                        <input  [(ngModel)]="exp.estatura" name="estatura" type="text"  required step="0.1" min="0"  class="form-control" >
+                                                                </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="row">
+                                                            
+                                                                   <div class="col-4">
+                                                                           <div class="form-group">
+                                                                                   <label class="control-label text-info">Gluteo (cm)</label>
+                                                                                   <input  [(ngModel)]="exp.gluteo" name="gluteo" step="0.1" min="0" required     class="form-control" >
+                                                                           </div>
+                                                                   </div>
+                                                            
+                                                        </div>
+                                                <div class="row">
+                                                        <div class="col-md-6">
+                                                                <label>IMC</label>
+                                                                    <div class="input-group mb-3">
+                                                                                    <input [(ngModel)]="exp.imc" name="imc" disabled type="number"  required class="form-control" >
+                                                                
+                                                                                    <div class="input-group-append">
+                                                                                      <button (click)="calcularIMC()" class="btn btn-info" type="button"> Calcular</button>
+                                                                                    </div>
+                                                                    </div>
+                                                                
+                                                        </div>
+                                            
+                                                        <div class="col-md-6">
+                                                        
+                                                                <div class="form-group">
+                                                                            <label class="control-label">Diagnostico de acuerdo a IMC</label>
+                                                                            <input [(ngModel)]="exp.diagnosticoimc" name="diagnosticoimc" disabled type="text"  required class="form-control" >
+                                                                    </div>
+                                                        </div>
+                                                   </div>
+                                                   <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Actualizar Medidas</button> 
+                                            </div>   
+                                        </form>
+                                        </div>
 
                                 
                             </div>
                             
                         </div>
+                   
             </div>
             <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
-                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
                 </div>
-            </form>
+            
 </ng-template>
+
+<ng-template #grafica let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">Evolucion Paciente</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+    
+
+     <div *ngIf="mostrargrafica===true" class="card-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li id="letra"class="nav-item"> <a class="nav-link active" role="tab" aria-expanded="true" href="#home" data-toggle="tab">Graficas</a> </li>
+
+                              <li id="letra"class="nav-item"> <a class="nav-link" role="tab" aria-expanded="false" href="#metas" data-toggle="tab">Metas</a> </li>
+              
+            </ul>
+            <!-- Tab panes -->
+          
+            <div class="tab-content">
+                    <div class="tab-pane active " id="home" role="tabpanel" aria-expanded="true">
+                              
+                                <div class="chart"style = "display:block; width:100%;" >
+                                                  <canvas baseChart
+                                                          [datasets]="barChartData"
+                                                          [labels]="barChartLabels"
+                                                          [colors] = "chartColors" 
+                                                          [options]="barChartOptions"
+                                                          [legend]="barChartLegend"
+                                                          [chartType]="barChartType"
+                                                          (chartHover)="chartHovered($event)"
+                                                          (chartClick)="chartClicked($event)">
+                                                </canvas>
+                                               </div> 
+                        </div>
+                <div class="tab-pane " id="metas" role="tabpanel" aria-expanded="true">
+                       <br><br>
+                        <div class="row">
+
+                                <div class="col-md-12">
+                                    
+                                        <div class="form-group row">
+                                            <label class="control-label text-lefth col-md-2">Peso (kg)</label>
+                                           <div class="col-3">
+                                                <div class="switch">
+                                                        <label>
+                                                          No
+                                                          <input name="peso" id="peso" [checked]="m.peso"  disabled  type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Fijada
+                                                        </label>
+                                                      </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                               <select id="pesometa" [(ngModel)]="m.pesometa" name="pesometa" disabled class="form-control custom-select">
+                                                    <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                    
+                                               </select>
+                                                
+                                            </div>
+                                            <div class="col-md-1">
+                                            <label>Hasta</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="pesokg" [(ngModel)]="m.pesokg" name="pesokg" disabled class="form-control" type="number">
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Kg</label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                            
+                        </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <strong *ngIf="colorpeso=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajepeso}} </strong >
+                                        <strong *ngIf="colorpeso=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajepeso}} </strong >
+                                        <strong *ngIf="colorpeso=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajepeso}} </strong >
+                                          <strong *ngIf="colorpeso=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                      
+                                      </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label text-lefth col-md-2">Cintura (cm)</label>
+                                           <div class="col-3">
+                                                <div class="switch">
+                                                        <label>
+                                                          No
+                                                          <input id="cintura" [checked]="m.cintura" disabled  type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Fijada
+                                                        </label>
+                                                      </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                               <select id="cinturameta" [(ngModel)]="m.cinturameta" name="cinturameta" disabled class="form-control custom-select">
+                                                    <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                               
+                                               </select>
+                                                
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Hasta</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="cinturacm" [(ngModel)]="m.cinturacm" name="cinturacm" disabled class="form-control" type="number">
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Cm</label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                           
+                        </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <strong *ngIf="colorcintura=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajecintura}} </strong >
+                                          <strong  *ngIf="colorcintura=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajecintura}} </strong >
+                                            <strong  *ngIf="colorcintura=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajecintura}} </strong >
+                                              <strong *ngIf="colorcintura=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                      
+                                        </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label text-lefth col-md-2">Abdomen (cm)</label>
+                                           <div class="col-3">
+                                                <div class="switch">
+                                                        <label>
+                                                          No
+                                                          <input id="abdomen" [checked]="m.abdomen"  disabled type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Fijada
+                                                        </label>
+                                                      </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                               <select id="abdomenmeta" [(ngModel)]="m.abdomenmeta" name="abdomenmeta" disabled class="form-control custom-select">
+                                                    <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                               
+                                               </select>
+                                                
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Hasta</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="abdomencm" [(ngModel)]="m.abdomencm" name="abdomencm" disabled class="form-control" type="number">
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Cm</label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                    
+                        </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <strong *ngIf="colorabdomen=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajeabdomen}} </strong>
+                                        <strong *ngIf="colorabdomen=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajeabdomen}} </strong>
+                                        <strong *ngIf="colorabdomen=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajeabdomen}} </strong>
+                                        <strong *ngIf="colorabdomen=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                    
+                                      </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label text-lefth col-md-2">Gluteo (cm)</label>
+                                           <div class="col-3">
+                                                <div class="switch">
+                                                        <label>
+                                                          No
+                                                          <input id="gluteo" [checked]="m.gluteo" disabled  type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Fijada
+                                                        </label>
+                                                      </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                               <select id="gluteometa" [(ngModel)]="m.gluteometa" name="gluteometa" disabled class="form-control custom-select">
+                                                    <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                               
+                                               </select>
+                                                
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Hasta</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="gluteocm" [(ngModel)]="m.gluteocm" name="gluteocm" disabled class="form-control" type="number">
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Cm</label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                            
+                        </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <strong *ngIf="colorgluteo=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajegluteo}} </strong>
+                                        <strong *ngIf="colorgluteo=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajegluteo}} </strong>
+                                        <strong *ngIf="colorgluteo=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajegluteo}} </strong>
+                                        <strong *ngIf="colorgluteo=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                    </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label text-lefth col-md-2">Brazo (cm)</label>
+                                           <div class="col-3">
+                                                <div class="switch">
+                                                        <label>
+                                                          No
+                                                          <input id="brazo" [checked]="m.brazo"  disabled type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Fijada
+                                                        </label>
+                                                      </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                               <select id="brazometa" [(ngModel)]="m.brazometa" name="brazometa" disabled class="form-control custom-select">
+                                                    
+                                                    
+                                                    <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                               
+                                               </select>
+                                                
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Hasta</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="brazocm"[(ngModel)]="m.brazocm" name="brazocm" disabled class="form-control" type="number">
+                                            </div>
+                                            <div class="col-md-1">
+                                                    <label>Cm</label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                           
+                        </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <strong *ngIf="colorbrazo=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajebrazo}} </strong>
+                                        <strong *ngIf="colorbrazo=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajebrazo}} </strong>
+                                        <strong *ngIf="colorbrazo=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajebrazo}} </strong>
+                                        <strong *ngIf="colorbrazo=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                    </div>
+                        </div>
+                
+                
+                
+                </div>
+                <!--second tab-->
+                
+                   
+                        
+
+                
+            </div>
+            
+        </div>
+        <div *ngIf="mostrargrafica===false" class="alert alert-info">
+                Aun no has registrado las medidas del paciente , para poder ver su evolucion es necesario que las registres!!
+            </div> 
+      
+        <div class="modal-footer">
+           
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    
+    </ng-template>
+
+    <ng-template #buscar let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Buscar Dietas</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cancelar()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                
+            <div  class="modal-body">
+                    <input #input (keyup)="buscarPlan (input.value)" type="text" class="form-control" placeholder="Buscar ..."><br><br>
+                <div *ngIf="alert===true" class="alert alert-success">
+                    Dieta seleccionada <i class="fa fa-check"></i>
+                </div>
+                <div id="busquedapaciente">
+                    <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th hidden="hidden">Id</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo de persona</th>
+                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of dietas">
+                                    <td hidden="hidden">{{d._id}}</td>
+                               
+                                    <td>{{d.nombre}}</td>
+                                    <td>{{d.tipopersona}}</td>
+                                                                  
+                                    <td>
+                                            <button id="botonsito" (click)="seleccionar(d,buscar)" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                           
+                                          
+                                                
+                                                  
+        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                
+            </div>
+         
+          </ng-template>

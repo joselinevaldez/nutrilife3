@@ -24,6 +24,19 @@ export class EventService {
                 return resp;
               });
 }
+public getCitasLista(datestart:string, dateend:string) {
+  this.token = localStorage.getItem('token');
+  //this.nutriologo = localStorage.getItem('id');
+  let url = URL_SERVICIOS + '/citas/nutriologo/lista?datestart='+datestart+'&dateend='+dateend;;
+  url+='&token='+this.token;
+  
+  return this.http.get( url)
+            .map( (resp: any) => {
+             ///console.log(resp.usuario);
+              //console.log(resp.paciente);
+              return resp;
+            });
+}
 public getCitasPaciente(idPaciente:string) {
     console.log("este id busca",idPaciente);
     this.token = localStorage.getItem('token');
@@ -47,7 +60,7 @@ public getIdPaciente(id:string) {
     return this.http.get( url)
               .map( (resp: any) => {
                ///console.log(resp.usuario);
-                //console.log(resp.paciente);
+                console.log(resp);
                 return resp;
               });
 }

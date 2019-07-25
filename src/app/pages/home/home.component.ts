@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService, EventService } from '../../services/service.index';
+import { HomeService, EventService, PacienteService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { Paciente } from '../../models/paciente.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; //esta linea
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +19,15 @@ pesoB:number=0;
 pesoA:number=0;
 peso:number=0;
 role:any;
+estadopeso:string="";
+infopeso:string="";
 paciente:Paciente[]=[];
 usuario: Usuario;
   constructor(
     public _homeService : HomeService,
-    public eventService: EventService
+    public eventService: EventService,
+    private modalService: NgbModal,
+    public _pacienteService: PacienteService
   ) { }
 
   ngOnInit() {
@@ -45,13 +51,36 @@ usuario: Usuario;
                 this.numDietas=resp.total;
              });
   }else if (this.usuario.role==="PACIENTE_ROLE"){
+    console.log("idUSUARIO",this.usuario._id);
     this.eventService.getIdPaciente(this.usuario._id)
     
       .subscribe(resp=>{
         //console.log(resp.paciente);
-        //console.log(resp);
-        this.peso=resp.pacientes[0].expediente.peso;
-        this.pesoA=resp.pacientes[0].expediente.pesoA;
+      console.log("RESPUESTA",resp);
+      console.log("PACIENTE",resp.pacientes[0]._id);
+      this._pacienteService.consultarMedidas(resp.pacientes[0]._id)
+       .subscribe(resp=>{
+         console.log("MEDIDAS CONSULTADAS",resp.medidas);
+         var longitud = resp.medidas.length;
+         this.peso=resp.medidas[0].peso;
+         this.pesoA=resp.medidas[longitud-1].peso;
+         if((this.peso-this.pesoA)>0){
+           var kilos = this.peso-this.pesoA;
+           this.infopeso=kilos+"kg";
+           this.estadopeso="bajo";
+         }else if((this.peso-this.pesoA)<0){
+          var kilos = this.peso-this.pesoA;
+          this.infopeso=Math.abs(kilos)+"kg";
+           console.log("Haz subido: "+Math.abs(kilos)+"kg");
+           this.estadopeso="subio";
+          }else if((this.peso-this.pesoA)==0){
+            console.log("Tu peso sigue igual");
+            this.infopeso="Atencion";
+            this.estadopeso="igual";
+          }
+       });
+        
+        
         this.pesoB=resp.pacientes[0].expediente.pesoB;
         this.paciente=resp.pacientes[0];
        
@@ -69,5 +98,8 @@ usuario: Usuario;
   
   
   }
+  }
+  modal(modal){
+    this.modalService.open(modal, { size: 'lg' });
   }
 }

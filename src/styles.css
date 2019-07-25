@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 #themecolors a {
     cursor: pointer;
 }
@@ -7,6 +8,19 @@
 }
 #botonsito{
     margin-left: 2px;
+}
+#medidast{
+    overflow: scroll;
+    width: 100%;
+    height: 300px;
+}
+.w200{
+    width: 400px;
+}
+.chart {display: block; width: 100%;} 
+#busquedapaciente{
+    height: 300px;
+    overflow: auto;
 }
 #tablaP{
     overflow:auto;
@@ -27,11 +41,36 @@
 #derecha{
     text-align: right;
 }
+.scheduling-status-color{
+    width: 20px;
+    height: 20px;
+}
+.confirmed-color{
+    background-color: #5cb3fd;
+
+}
 .w150{
     width: 150px;
 }
-
-
+.w40{
+    width: 80px; 
+    height: 80px;
+}
+.dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+  }
+  .dark-modal .close {
+    color: white;
+  }
+  .light-blue-backdrop {
+    background-color: #5cb3fd;
+  }
+.centro{
+    display:block;
+    margin:auto;
+    width: 180px;
+}
 #tablaPacientes{
     overflow: auto;
 }
@@ -100,7 +139,51 @@ height: 50px;
 #targeta{
     height: 380px;
 }
-
-
+#pasos{
+    border-left: 3px solid rgb(0, 153, 255);
+}
+#botones_centrar{
+    text-align: center;
+}
+.btn-g{
+    width: 200px;
+    color:#398bf7 !important;
+    font-size: 15px;
+}
+.btn-g:hover{
+    color: white !important;
+}
+#img-user{
+    width: 100% !important;
+    max-width: 200px;
+}
+.center{
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+.acordion{
+    background-color: transparent !important;
+}
+.btn-acordion{
+    background-color: white !important;
+    color: #398bf7 !important;
+    border: none;
+}
+.acordion-cuerpo{
+    border-radius: 2em !important;
+}
 /*estilos*/
 
+.shadow{
+    -webkit-box-shadow: 1px 0px 12px -1px rgba(235,235,235,1);
+    -moz-box-shadow: 1px 0px 12px -1px rgba(235,235,235,1);
+    box-shadow: 1px 0px 12px -1px rgba(235,235,235,1);
+}
+.border-list{
+    border: 1px solid lightgray;
+    border-bottom: none;
+}
+.border-bottom{
+    border-bottom: 1px solid lightgray;
+}

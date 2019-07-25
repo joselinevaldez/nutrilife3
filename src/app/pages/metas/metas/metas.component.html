@@ -1,0 +1,231 @@
+<div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div *ngIf="mostrarmeta===true"  >
+                                                
+                                                
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div  class="alert alert-info">
+                                            Las metas solo pueden ser fijadas por tu nutriologo.
+                                        </div>
+                                            <div class="form-group row">
+                                                <label class="control-label text-lefth col-md-2">Peso (kg)</label>
+                                               <div class="col-2">
+                                                    <div class="switch">
+                                                            <label>
+                                                              No
+                                                              <input name="peso" id="peso" [checked]="m.peso"  disabled  type="checkbox">
+                                                              <span class="lever"></span>
+                                                              Fijada
+                                                            </label>
+                                                          </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <select id="pesometa" [(ngModel)]="m.pesometa" name="pesometa" disabled class="form-control custom-select">
+                                                        <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                        
+                                                   </select>
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                <label>Hasta</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input id="pesokg" [(ngModel)]="m.pesokg" name="pesokg" disabled class="form-control" type="number">
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Kg</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <strong *ngIf="colorpeso=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajepeso}} </strong >
+                                                  <strong *ngIf="colorpeso=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajepeso}} </strong >
+                                                  <strong *ngIf="colorpeso=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajepeso}} </strong >
+                                                    <strong *ngIf="colorpeso=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label text-lefth col-md-2">Cintura (cm)</label>
+                                               <div class="col-2">
+                                                    <div class="switch">
+                                                            <label>
+                                                              No
+                                                              <input id="cintura" [checked]="m.cintura" disabled  type="checkbox">
+                                                              <span class="lever"></span>
+                                                              Fijada
+                                                            </label>
+                                                          </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <select id="cinturameta" [(ngModel)]="m.cinturameta" name="cinturameta" disabled class="form-control custom-select">
+                                                        <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                   
+                                                   </select>
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Hasta</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input id="cinturacm" [(ngModel)]="m.cinturacm" name="cinturacm" disabled class="form-control" type="number">
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Cm</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                  <strong *ngIf="colorcintura=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajecintura}} </strong >
+                                                    <strong  *ngIf="colorcintura=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajecintura}} </strong >
+                                                      <strong  *ngIf="colorcintura=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajecintura}} </strong >
+                                                        <strong *ngIf="colorcintura=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                                
+                                                  </div>
+                                            </div>
+                                        </div>
+                               
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label text-lefth col-md-2">Abdomen (cm)</label>
+                                               <div class="col-2">
+                                                    <div class="switch">
+                                                            <label>
+                                                              No
+                                                              <input id="abdomen" [checked]="m.abdomen"  disabled type="checkbox">
+                                                              <span class="lever"></span>
+                                                              Fijada
+                                                            </label>
+                                                          </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <select id="abdomenmeta" [(ngModel)]="m.abdomenmeta" name="abdomenmeta" disabled class="form-control custom-select">
+                                                        <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                   
+                                                   </select>
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Hasta</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input id="abdomencm" [(ngModel)]="m.abdomencm" name="abdomencm" disabled class="form-control" type="number">
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Cm</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong *ngIf="colorabdomen=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajeabdomen}} </strong>
+                                                    <strong *ngIf="colorabdomen=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajeabdomen}} </strong>
+                                                    <strong *ngIf="colorabdomen=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajeabdomen}} </strong>
+                                                    <strong *ngIf="colorabdomen=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                                
+                                                  </div>
+                                            </div>
+                                        </div>
+                        
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label text-lefth col-md-2">Gluteo (cm)</label>
+                                               <div class="col-2">
+                                                    <div class="switch">
+                                                            <label>
+                                                              No
+                                                              <input id="gluteo" [checked]="m.gluteo" disabled  type="checkbox">
+                                                              <span class="lever"></span>
+                                                              Fijada
+                                                            </label>
+                                                          </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <select id="gluteometa" [(ngModel)]="m.gluteometa" name="gluteometa" disabled class="form-control custom-select">
+                                                        <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                   
+                                                   </select>
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Hasta</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input id="gluteocm" [(ngModel)]="m.gluteocm" name="gluteocm" disabled class="form-control" type="number">
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Cm</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong *ngIf="colorgluteo=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajegluteo}} </strong>
+                                                    <strong *ngIf="colorgluteo=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajegluteo}} </strong>
+                                                    <strong *ngIf="colorgluteo=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajegluteo}} </strong>
+                                                    <strong *ngIf="colorgluteo=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label text-lefth col-md-2">Brazo (cm)</label>
+                                               <div class="col-2">
+                                                    <div class="switch">
+                                                            <label>
+                                                              No
+                                                              <input id="brazo" [checked]="m.brazo"  disabled type="checkbox">
+                                                              <span class="lever"></span>
+                                                              Fijada
+                                                            </label>
+                                                          </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <select id="brazometa" [(ngModel)]="m.brazometa" name="brazometa" disabled class="form-control custom-select">
+                                                        
+                                                        
+                                                        <option *ngFor="let m of metafijada" value="{{m}}">{{m}}</option>
+                                                   
+                                                   </select>
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Hasta</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input id="brazocm"[(ngModel)]="m.brazocm" name="brazocm" disabled class="form-control" type="number">
+                                                </div>
+                                                <div class="col-md-1">
+                                                        <label>Cm</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong *ngIf="colorbrazo=='green'" class="text-success"><i class="fa fa-smile-o"> </i>{{mensajebrazo}} </strong>
+                                                    <strong *ngIf="colorbrazo=='red'" class="text-danger"><i class="fa fa-frown-o"></i> {{mensajebrazo}} </strong>
+                                                    <strong *ngIf="colorbrazo=='yellow'" class="text-warning"><i class="fa fa-meh-o"></i>{{mensajebrazo}} </strong>
+                                                    <strong *ngIf="colorbrazo=='ninguno'" class="text-info"><i class="fa fa-star"></i>Esta meta no ah sido fijada </strong >
+                                                </div>
+                                            </div>
+                                        </div>
+                               
+                            </div>
+                            
+                                </div>
+                                <div *ngIf="mostrarmeta===false" >
+                                    <div  class="alert alert-info">
+                                            Tu nutriologo aun no te asigna ninguna meta.
+                                        </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        

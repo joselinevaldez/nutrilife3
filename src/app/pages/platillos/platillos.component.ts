@@ -3,6 +3,7 @@ import { AlimentosService, PlatillosService } from '../../services/service.index
 import { Platillo } from '../../models/platillo.models';
 import { NgForm } from '@angular/forms';
 import { Alimentosp } from '../../models/alimentosp.models';
+import { NgbModal,NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-platillos',
@@ -17,14 +18,19 @@ tabla:any;
 cantidad: any;
 contador:number;
 acumulador:number;
+mostrar:boolean=false;
 numero:number;
 total:number;
 existe:boolean;
 posicion:string;
+categoriaNombre: string;
+alimento:string;
 platillo:Platillo=new Platillo();
 alimentosp:Alimentosp=new Alimentosp();
+alert:boolean=false;
 alimentos:any[]=[];
   constructor(
+    private modalService: NgbModal,
     public _platillosService: PlatillosService,
     public _alimentoService:AlimentosService
   ) { }
@@ -106,31 +112,34 @@ alimentos:any[]=[];
  }
  categoria(categoria:any){
    
-   var categoriaNombre: string;
+
    var c:any = document.getElementById("categoria");
    if(categoria===1){
-    categoriaNombre= "Lacteos y derivados";
+    this.categoriaNombre= "Lacteos y derivados";
    }else  if(categoria===2){
-    categoriaNombre=   "Frutas";
+    this.categoriaNombre=   "Frutas";
    } else  if(categoria===3){
-    categoriaNombre= "Cereales y derivados";
+    this.categoriaNombre= "Cereales y derivados";
    } else  if(categoria===4){
-    categoriaNombre= "Legumbres,frutos secos y tuberculos";
+    this.categoriaNombre= "Legumbres,frutos secos y tuberculos";
    }else  if(categoria===5){
-    categoriaNombre=  "verduras y hortalizas";
+    this.categoriaNombre=  "verduras y hortalizas";
    }else  if(categoria===6){
-    categoriaNombre= "Pescado,carne y huevos";
+    this.categoriaNombre= "Pescado,carne y huevos";
    }
    else  if(categoria===7){
-    categoriaNombre=  "Grasas";
+    this.categoriaNombre=  "Grasas";
    }
-   c.value=categoriaNombre;
-   this._alimentoService.cargarAlimentoSelect(categoriaNombre)
-      .subscribe(resp=>{
-        this.alimentos=resp.alimentos;
-        console.log(this.alimentos);
-      });
-   console.log(categoriaNombre);
+   c.value=this.categoriaNombre;
+   this.cargarSelect(this.categoriaNombre);
+   console.log(this.categoriaNombre);
+ }
+ cargarSelect(categoriaNombre:string){
+  this._alimentoService.cargarAlimentoSelect(categoriaNombre)
+  .subscribe(resp=>{
+    this.alimentos=resp.alimentos;
+    console.log(this.alimentos);
+  });
  }
  nuevoPlatillo(platillosP:NgForm){
    if(platillosP.valid){
@@ -169,9 +178,48 @@ alimentos:any[]=[];
  
    }
  }
+ modalbuscar(modal){
+  if(this.alimentos.length===0){
+    this.mostrar=false;
+    console.log("entro aqui");
+  }else{
+    this.mostrar=true;
+    console.log("entro aqui");
+  }
+  this.modalService.open(modal);
 
+}
+seleccionar(a:any,modal:any){
+  console.log(a);
+  this.alimento=a._id+","+a.unidad;
+  this.alert=true;
+  //console.log("alimentos",this.alimentos);
+ 
 
+  //var select:any = document.getElementById("alimento"); //El <select>
+  //select.options[this.select.selectedIndex].value=this.alimento; //El texto de la opción seleccionada
+ 
+  //var alimento = select.options[this.select.selectedIndex].text; //El texto de la opción seleccionada
+  
+}
+cancelar(){
+  this.alert=false;
+}
 
-
+buscarAlimento(termino:string){
+  if (termino.length <= 0){
+    this.cargarSelect(this.categoriaNombre);
+    return;
+  }
+  console.log(termino);
+   
+  ///
+  this._alimentoService.buscarAlimentoCategoria(termino,this.categoriaNombre)
+    .subscribe( (alimentos)=>{
+      this.alimentos=alimentos;
+      console.log(alimentos);
+    });
+    //console.log("arreglo",this.paciente.length);
+}
  
 }

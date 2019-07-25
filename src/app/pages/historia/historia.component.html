@@ -1,0 +1,427 @@
+        <div *ngIf="tipohistoria==='ver'" class="row">
+                <div class="col-lg-12">
+                        <div class="card"  style="border-left: 3px solid rgb(0, 153, 255);" >
+                        <div class="card-body">
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <b><strong> <label>Nombre del paciente:</label></strong></b>
+                                        <h6>Joseline Valdez Gastelum</h6>
+                                </div>
+                                <div class="col-lg-6" align="right">
+                                        <b><strong> <label>Fecha creación:</label></strong></b><br>
+                                        <b><strong> <label>Ultima modificación:</label></strong></b>
+                                </div>
+                        </div>    
+                                
+                        </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Historial Clinico</font></font></h4>
+                                               
+                        <div class="vtabs customvtab">
+                            <ul class="nav nav-tabs tabs-vertical" role="tablist">
+                                
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#info" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="mdi mdi-account"></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-account"></i> Inf. Personal</font></font></span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#patologicos" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="fa fa-stethoscope"></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="fa fa-stethoscope"></i> Ant. Patologicos</font></font></span> </a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#dieta" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="mdi mdi-food-apple"></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-food-apple  "></i> Alimentacion</font></font></span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#actividad" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="mdi mdi-human-handsup "></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-human-handsup "></i> Actividad Fisica</font></font></span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#emociones" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="mdi mdi-heart "></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi mdi-heart"></i> Emociones</font></font></span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#laboratorios" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="mdi  mdi-needle "></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="mdi  mdi-needle"></i> Lab. Clinicos</font></font></span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#laboratorios" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ti-ruler-alt "></i></span> <span class="hidden-xs-down"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="ti-ruler-alt"></i> Medidas iniciales</font></font></span></a> </li>
+                             
+                                
+                                
+                            </ul>
+                            <!-- TABS -->
+                            <div class="tab-content">
+                                <!-- INICIA TAB PREGUNTAS PERSONALES -->
+                                <div class="tab-pane p-20 active" id="info" role="tabpanel" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+                                    <form ngNativeValidate [formGroup]="personalForm"  >
+                                            <strong><h4>Informacion Personal</h4></strong>
+                                                    <div class="row col-lg-12">
+                                                          
+                                                            <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                            <label class="control-label"><span class="text-info">* </span>Motivo de la consulta y ¿Por que quiere llevar el tratamiento?</label>
+                                                                            <textarea formControlName="motivo"  name="motivo"   class="form-control" rows="5" ></textarea>
+                                                                            <p *ngIf="personalForm.controls.motivo.invalid && !personalForm.controls.motivo.pristine || personalForm.controls.motivo.invalid && press==true " class="text text-danger">El motivo es requerido <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                                                            
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                            <label class="control-label">Anteriormente , ¿ se ha puesto en tratamiento para el control de peso ?</label>
+                                                                            <select formControlName="tanteriores"  name="tanteriores"  class="form-control custom-select" >
+                                                                             <option *ngFor="let t of opciones" value="{{t}}">{{t}}</option>
+                                                                            </select> 
+                                                                            
+                                                                    </div>
+                                                                    <div class="form-group"  *ngIf="personalForm.controls.tanteriores.value=='Si'">
+                                                                            <label class="control-label">¿Termino el tratamiento?</label>
+                                                                            <select formControlName="termino"  name="termino"  class="form-control custom-select" >
+                                                                             <option *ngFor="let t of opciones" value="{{t}}">{{t}}</option>
+                                                                            </select>
+                                                                                                                                                   
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group" *ngIf="personalForm.controls.termino.value=='No' && personalForm.controls.tanteriores.value=='Si'">
+                                                                            <label class="control-label">¿Por que no termino su tratamiento?</label>
+                                                                             <textarea formControlName="notermino"  name="notermino"   class="form-control" rows="5" ></textarea>
+                                                                                                                                                          
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Diagnostico</label>
+                                                                        <select formControlName="diagnostico"  name="diagnostico"  class="form-control custom-select" >
+                                                                         <option *ngFor="let d of diagnostico" value="{{d}}">{{d}}</option>
+                                                                        </select> 
+                                                                        
+                                                                    </div>
+                                                                    <div class="form-group" *ngIf="personalForm.controls.diagnostico.value=='Obesidad'">
+                                                                            <label class="control-label">¿A que edad comenzo su obesidad?</label>
+                                                                            <div class="input-group">
+                                                                                <input type="number" formControlName="edadobesidad" name="edadobesidad" class="form-control">
+                                                                                <div class="input-group-addon">Años</div>
+                                                                            </div>
+                                                                    </div>
+                                                                   
+                                                                    <div class="form-group" >
+                                                                                <label class="control-label">¿Hace cuanto tiempo notaste que comenzaste a ganar o perder mas peso de lo normal?</label>
+                                                                                <input type="text" formControlName="tiempopeso" name="tiempopeso" class="form-control">
+                                                                                <p *ngIf="personalForm.controls.tiempopeso.invalid && !personalForm.controls.tiempopeso.pristine || personalForm.controls.tiempopeso.invalid && press==true " class="text text-danger">Este campo es requerido <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                                                    
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">¿Que esta dispuesto a hacer hoy para cumplir con el tratamiento y cumplir la meta que el dia de hoy nos vamos a poner?</label>
+                                                                        <textarea formControlName="disposicion" name="disposicion"class="form-control" rows="3" ></textarea>
+                                                                        <p *ngIf="personalForm.controls.disposicion.invalid && !personalForm.controls.disposicion.pristine || personalForm.controls.disposicion.invalid && press==true " class="text text-danger">Este campo es requerido <i class="fa fa-exclamation-circle uncheck"></i></p>
+                                                                    
+                                                                    </div>
+                                                            </div>
+                                                            <br>
+                                                            
+                                                            
+                                                            
+                                                    </div>
+                                                    
+                                                    <div *ngIf="!personalForm.valid && press==true" class="alert alert-danger alert-rounded col-md-6">
+                                                        <p class="text text-danger">Llena los campos requeridos para continuar</p>
+                                                    </div>
+                                                    <div *ngIf="guardando==true" class="alert alert-info col-md-6">
+                                                            <p class="text text-info">Guardando por favor espere <i class="fa fa-spinner fa-spin fa-1x"></i></p>
+                                                    </div>
+
+                                                    <div class="form-actions col-md-12">
+                                    
+                                                            <button (click)="formPersonal(personalForm.value)" class="btn btn-info"> <i class="fa fa-check"></i> Guardar</button>&nbsp;
+                                                            
+                                                    </div>            
+                                    </form>        
+                                </div>
+                                 <!-- TERMINA TAB PREGUNTAS PERSONALES -->
+                                 <!--INCIA TAB ANTECEDENTES PATOLOGICOS-->
+                                <div class="tab-pane" id="patologicos" role="tabpanel" aria-expanded="false">
+                                    
+                                    <br> 
+                                    <form ngNativeValidate [formGroup]="patologicosForm"  >                
+                                    <div class="row col-lg-12">
+                                        <div class="col-md-6">
+                                            <strong><label class="text-info">Antedecentes Familiares</label></strong><br>
+                                            <div class="form-group row">
+                                                    <label for="uname" class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Papa o mama con sobrepeso</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="fsobrepeso" name="fsobrepeso"class="form-control custom-select" >
+                                                                <option *ngFor="let a of antFamiliares" value="{{a}}">{{a}}</option>
+                                                            </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label for="uname" class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Papa o mama con obesidad</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="fobesidad" name="fobesidad"class="form-control custom-select" >
+                                                                    <option *ngFor="let a of antFamiliares" value="{{a}}">{{a}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label for="uname" class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Papa o mama con diabetes</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="fdiabetes" name="fdiabetes"class="form-control custom-select" >
+                                                                    <option *ngFor="let a of antFamiliares" value="{{a}}">{{a}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                    <label for="uname" class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Papa o mama con hipertencion</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="fhipertencion" name="fhipertencion"class="form-control custom-select" >
+                                                                    <option *ngFor="let a of antFamiliares" value="{{a}}">{{a}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label for="uname" class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Papa o mama con cancer</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="fcancer" name="fcancer"class="form-control custom-select" >
+                                                                    <option *ngFor="let a of antFamiliares" value="{{a}}">{{a}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <br><br><div class="form-group">
+                                                    <label  class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Antecedentes familiares</font></font></label>
+                                                    <div class="">
+                                                        
+                                                            <textarea formControlName="otrofamiliar" name="otrofamiliar"class="form-control " rows="3" ></textarea>
+                                                                    
+                                                            
+                                                    </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <strong><label class="text-info">Antedecentes Personales</label></strong><br>
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido colitis?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="pcolitis" name="pcolitis"class="form-control custom-select" >
+                                                                <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                            </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido gastritis?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="pgastritis" name="pgastritis"class="form-control custom-select" >
+                                                                    <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido estreñimiento?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="pestrenimiento" name="pestrenimiento"class="form-control custom-select" >
+                                                                    <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido diabetes?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="pdiabetes" name="pdiabetes"class="form-control custom-select" >
+                                                                    <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido obesidad?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="pobesidad" name="pobesidad"class="form-control custom-select" >
+                                                                    <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label  class="col-sm-6 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Tienes o has tenido hipertencion?</font></font></label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                            <select formControlName="phipertencion" name="phipertencion"class="form-control custom-select" >
+                                                                    <option *ngFor="let o of opciones" value="{{o}}">{{o}}</option>
+                                                                </select>
+                                                            
+                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <label  class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros antecedentes personales</font></font></label>
+                                                    <div class="">
+                                                        
+                                                            <textarea formControlName="otropersonal" name="otropersonal"class="form-control " rows="2" ></textarea>
+                                                                    
+                                                            
+                                                    </div>
+                                            </div>
+                                            
+                                        </div>      
+                                          
+                                             
+                                    </div>
+                                    <div *ngIf="guardando==true" class="alert alert-info col-md-6">
+                                            <p class="text text-info">Guardando por favor espere <i class="fa fa-spinner fa-spin fa-1x"></i></p>
+                                    </div>
+                                    <div class="form-actions col-md-12">
+                                    
+                                            <button (click)="formPatologicos(patologicosForm.value)" class="btn btn-info"> <i class="fa fa-check"></i> Guardar</button>&nbsp;
+                                            
+                                    </div>  
+                                    </form>
+                                </div>
+                                <div class="tab-pane p-20 " id="info2" role="tabpanel" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+                                
+                                    <div class="row col-lg-12">
+                                            <div class="col-md-6">
+                                                  <div class="form-group ">
+                                                      <label class="control-label">¿A que edad fue tu primera menstruación?</label>
+                                                      <input type="text" id="agua" class="form-control" >
+                                                       </div>
+                                              </div>
+                                            <!--/span-->
+                                          
+                                                  <div class="col-md-6">
+                                                    <div class="form-group ">
+                                                        <label class="control-label"> ¿Como es tu ciclo mestrual (regular o irregular)? </label>
+                                                        <input type="text" id="apeMaterno" class="form-control" >
+                                                        </div>
+                                                </div>
+                  
+                                           
+                                            <!--/span-->
+                                           </div>
+                                        <div class="row col-lg-12">
+                                            <div class="col-md-4">
+                                                  <div class="form-group ">
+                                                      <label class="control-label">¿Cuantos vasos o litros de agua tomas al dia?</label>
+                                                      <input type="text" id="agua" class="form-control" >
+                                                       </div>
+                                              </div>
+                                            <!--/span-->
+                                          
+                                                  <div class="col-md-4">
+                                                    <div class="form-group ">
+                                                        <label class="control-label"> ¿Normalmente donde acostumbras comer? </label>
+                                                        <input type="text" id="apeMaterno" class="form-control" >
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group ">
+                                                        <label class="control-label"> ¿Cuantas comidas hace al dia? </label>
+                                                        <input type="text" id="apeMaterno" class="form-control" >
+                                                        </div>
+                                                </div>
+                  
+                                           
+                                            <!--/span-->
+                                           </div>
+                                </div>
+                                <div class="tab-pane p-20" id="dieta" role="tabpanel" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                        
+                                                <form ngNativeValidate [formGroup]="alimentacionForm"  > 
+                                                    <div class="row col-lg-12">
+                                                        <div class="col-md-6">
+                                                                <div class="form-group row">
+                                                                        <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Cuantos vasos de agua consumes al dia?</font></font></label>
+                                                                        <div class="col-sm-4">                
+                                                                          <input formControlName="agua" name="agua" class="form-control" type="number">
+                                                                                                
+                                                                         </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                                <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Cuantas comidas haces al dia?</font></font></label>
+                                                                                <div class="col-sm-4">                
+                                                                                  <input formControlName="comidasdia" name="comidasdia" class="form-control" type="number">
+                                                                                                        
+                                                                                 </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                                <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Donde acostumbras hacer tus comidas?</font></font></label>
+                                                                                <div class="col-sm-4">                
+                                                                                  <select formControlName="dondecome" name="dondecome" class="form-control custom-select">
+                                                                                          <option *ngFor="let c of comidas" value="{{c}}"> {{c}}</option>
+                                                                                  </select>
+                                                                                                        
+                                                                                 </div>
+                                                                </div>
+                                                        </div>
+                                                   </div>
+                                                </form>
+                                        
+                                                
+                                </font></font></div>
+                                <div class="tab-pane p-20" id="actividad" role="tabpanel" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+                                        <br> 
+                                        <form ngNativeValidate [formGroup]="actividadForm"  >                
+                                        <div class="row col-lg-12">
+                                            <div class="col-md-9">
+                                                <strong><label class="text-info">Autovaloracion</label></strong><br>
+                                                <div class="form-group row">
+                                                        <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Del 1 al 10 como consideras que sea tu actividad fisica</font></font></label>
+                                                        <div class="col-sm-4">
+                                                            
+                                                                <select formControlName="calificacion" name="calificacion"class="form-control custom-select" >
+                                                                    <option *ngFor="let c of calificaciones" value="{{c}}">{{c}}</option>
+                                                                </select>
+                                                                
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                                <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Que tipo de ejercicio realizas?</font></font></label>
+                                                                <div class="col-sm-4">
+                                                                    
+                                                                        <input class="form-control" formControlName="tejercicio" name="tejercicio" type="text">
+                                                                        
+                                                                </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                                        <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Cuantos dias a la semana haces ejercicio?</font></font></label>
+                                                                        <div class="col-sm-4">
+                                                                            
+                                                                                <select formControlName="diasejercicio" name="diasejercicio"class="form-control custom-select" >
+                                                                                    <option *ngFor="let d of dias" value="{{d}}"><span >{{d}}</span></option>
+                                                                                </select>
+                                                                                
+                                                                        </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                                        <label for="uname" class="col-sm-8 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">¿Cuantos tiempo le dedicas al dia cuando haces ejercicio?</font></font></label>
+                                                                        <div  class="col-sm-4">
+                                                                                <input formControlName="tiempoejercicio" name="tiempoejercicio" class="form-control" type="text"  >
+                                                                            
+                                                                                
+                                                                        </div>
+                                                        </div>
+                                            </div> 
+                                               
+                                              
+                                                 
+                                        </div>
+                                        <div *ngIf="guardando==true" class="alert alert-info col-md-6">
+                                                <p class="text text-info">Guardando por favor espere <i class="fa fa-spinner fa-spin fa-1x"></i></p>
+                                        </div>
+                                        <div class="form-actions col-md-12">
+                                        
+                                                <button (click)="formPatologicos(patologicosForm.value)" class="btn btn-info"> <i class="fa fa-check"></i> Guardar</button>&nbsp;
+                                                
+                                        </div>  
+                                        </form>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

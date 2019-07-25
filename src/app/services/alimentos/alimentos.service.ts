@@ -53,6 +53,20 @@ public buscarAlimento( termino:string){
               return resp.alimentos;
             });
 }
+
+public buscarAlimentoCategoria( termino:string,categoria:string){
+  this.token = localStorage.getItem('token');
+  let url = URL_SERVICIOS + '/busqueda/coleccion/alimentos/'+termino;
+  
+  url+='?token='+this.token+'&categoria='+categoria;
+
+  return this.http.get( url)
+            .map( (resp: any) => {
+             ///console.log(resp.usuario);
+              //console.log(resp.paciente);
+              return resp.alimentos;
+            });
+}
 public cargarAlimentoSelect(grupo:string) {
   this.token = localStorage.getItem('token');
   //this.nutriologo = localStorage.getItem('id');

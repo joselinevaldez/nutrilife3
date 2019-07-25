@@ -107,10 +107,6 @@ login(usuario: Usuario, recordar:boolean=false){
                 }
                 return true;
               })
-              .catch( err => {
-                swal( 'Error en el login', err.error.mensaje , 'error');
-                return Observable.throw( err );
-              });
               
 
 }

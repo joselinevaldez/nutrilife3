@@ -69,6 +69,8 @@
                                                         <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                            
                                                     </select>
+                                                    <button class="btn btn-info" (click)="modalbuscar(buscar,'domingodesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                     <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingodesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                         </div>
 
@@ -93,6 +95,8 @@
                                                           <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                              
                                                       </select>
+                                                      <button class="btn btn-info" (click)="modalbuscar(buscar,'domingocomida')"><i class="fa fa-search"></i></button>
+                                
                                                       <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingocomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                           </div>                            
    
@@ -110,6 +114,8 @@
                                                               <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                  
                                                           </select>
+                                                          <button class="btn btn-info" (click)="modalbuscar(buscar,'domingocena')"><i class="fa fa-search"></i></button>
+                                
                                                           <button class="btn btn-outline-secondary" (click)="consultarAlimentos('domingocena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                               </div>                            
        
@@ -130,6 +136,8 @@
                                                           <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                              
                                                       </select>
+                                                      <button class="btn btn-info" (click)="modalbuscar(buscar,'lunesdesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                       <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunesdesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                           </div>
   
@@ -155,6 +163,8 @@
                                                             <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                
                                                         </select>
+                                                        <button class="btn btn-info" (click)="modalbuscar(buscar,'lunescomida')"><i class="fa fa-search"></i></button>
+                                
                                                         <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunescomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                             </div>                            
      
@@ -172,6 +182,8 @@
                                                                 <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                    
                                                             </select>
+                                                            <button class="btn btn-info" (click)="modalbuscar(buscar,'lunescena')"><i class="fa fa-search"></i></button>
+                                
                                                             <button class="btn btn-outline-secondary" (click)="consultarAlimentos('lunescena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                 </div>                            
          
@@ -192,6 +204,8 @@
                                                               <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                  
                                                           </select>
+                                                          <button class="btn btn-info" (click)="modalbuscar(buscar,'martesdesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                           <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martesdesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                               </div>
       
@@ -216,6 +230,8 @@
                                                                 <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                    
                                                             </select>
+                                                            <button class="btn btn-info" (click)="modalbuscar(buscar,'martescomida')"><i class="fa fa-search"></i></button>
+                                
                                                             <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martescomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                 </div>                            
          
@@ -233,6 +249,8 @@
                                                                     <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                        
                                                                 </select>
+                                                                <button class="btn btn-info" (click)="modalbuscar(buscar,'martescena')"><i class="fa fa-search"></i></button>
+                                
                                                                 <button class="btn btn-outline-secondary" (click)="consultarAlimentos('martescena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                     </div>                            
              
@@ -253,6 +271,8 @@
                                                                   <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                      
                                                               </select>
+                                                              <button class="btn btn-info" (click)="modalbuscar(buscar,'miercolesdesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                               <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolesdesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                   </div>
           
@@ -277,6 +297,8 @@
                                                                     <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                        
                                                                 </select>
+                                                                <button class="btn btn-info" (click)="modalbuscar(buscar,'miercolescomida')"><i class="fa fa-search"></i></button>
+                                
                                                                 <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolescomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                     </div>                            
              
@@ -294,6 +316,8 @@
                                                                         <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                            
                                                                     </select>
+                                                                    <button class="btn btn-info" (click)="modalbuscar(buscar,'miercolescena')"><i class="fa fa-search"></i></button>
+                                
                                                                     <button class="btn btn-outline-secondary" (click)="consultarAlimentos('miercolescena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                         </div>                            
                  
@@ -314,6 +338,8 @@
                                                                       <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                          
                                                                   </select>
+                                                                  <button class="btn btn-info" (click)="modalbuscar(buscar,'juevesdesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                                   <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevesdesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                       </div>
               
@@ -338,6 +364,8 @@
                                                                         <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                            
                                                                     </select>
+                                                                    <button class="btn btn-info" (click)="modalbuscar(buscar,'juevescomida')"><i class="fa fa-search"></i></button>
+                                
                                                                     <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevescomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                         </div>                            
                  
@@ -355,6 +383,8 @@
                                                                             <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                
                                                                         </select>
+                                                                        <button class="btn btn-info" (click)="modalbuscar(buscar,'juevescena')"><i class="fa fa-search"></i></button>
+                                
                                                                         <button class="btn btn-outline-secondary" (click)="consultarAlimentos('juevescena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                             </div>                            
                      
@@ -375,6 +405,8 @@
                                                                           <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                              
                                                                       </select>
+                                                                      <button class="btn btn-info" (click)="modalbuscar(buscar,'viernesdesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                                       <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernesdesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                           </div>
                   
@@ -399,6 +431,8 @@
                                                                             <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                
                                                                         </select>
+                                                                        <button class="btn btn-info" (click)="modalbuscar(buscar,'viernescomida')"><i class="fa fa-search"></i></button>
+                                
                                                                         <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernescomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                             </div>                            
                      
@@ -416,6 +450,8 @@
                                                                                 <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                    
                                                                             </select>
+                                                                            <button class="btn btn-info" (click)="modalbuscar(buscar,'viernescena')"><i class="fa fa-search"></i></button>
+                                
                                                                             <button class="btn btn-outline-secondary" (click)="consultarAlimentos('viernescena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                                 </div>                            
                          
@@ -432,10 +468,12 @@
                       
                                                               <div class="input-group">
                                                                       
-                                                                      <select id="sabadodesayuno"name="desayunoS" ngModel required class="form-control custom-select ">
+                                                                      <select id="sabadodesayuno"name="desayunoS" ngModel value="{{platilloselect}}"required class="form-control custom-select ">
                                                                               <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                  
                                                                           </select>
+                                                                          <button class="btn btn-info" (click)="modalbuscar(buscar,'sabadodesayuno')"><i class="fa fa-search"></i></button>
+                                
                                                                           <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadodesayuno'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                               </div>
                       
@@ -460,6 +498,8 @@
                                                                                 <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                    
                                                                             </select>
+                                                                            <button class="btn btn-info" (click)="modalbuscar(buscar,'sabadocomida')"><i class="fa fa-search"></i></button>
+                                
                                                                             <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadocomida'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                                 </div>                            
                          
@@ -477,6 +517,8 @@
                                                                                     <option  *ngFor="let p of platillo" value="{{p._id}}" ><span class="color"> </span> {{p.nombre}} ({{p.tiempocomida}})</option>
                                                                                        
                                                                                 </select>
+                                                                                <button class="btn btn-info" (click)="modalbuscar(buscar,'sabadocena')"><i class="fa fa-search"></i></button>
+                                
                                                                                 <button class="btn btn-outline-secondary" (click)="consultarAlimentos('sabadocena'); abrirModal(verplatillo)"><i class="mdi mdi-food-variant"></i></button>
                                                                     </div>                            
                              
@@ -538,3 +580,55 @@
         </div>
     
     </ng-template>
+
+
+    <ng-template #buscar let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Buscar Platillo</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cancelar()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                
+            <div  class="modal-body">
+                    <input #input (keyup)="buscarPlatillo (input.value)" type="text" class="form-control" placeholder="Buscar ..."><br><br>
+                <div *ngIf="alert===true" class="alert alert-success">
+                    Platillo seleccionado <i class="fa fa-check"></i>
+                </div>
+                <div id="busquedapaciente">
+                    <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th hidden="hidden">Id</th>
+                                    <th>Nombre</th>
+                                    <th>Tiempo comida</th>
+                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of platillo">
+                                    <td hidden="hidden">{{p._id}}</td>
+                               
+                                    <td>{{p.nombre}}</td>
+                                    <td>{{p.tiempocomida}}</td>
+                                                                  
+                                    <td>
+                                            <button id="botonsito" (click)="seleccionar(p,buscar)" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                           
+                                          
+                                                
+                                                  
+        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+           
+            <div class="modal-footer">
+                
+            </div>
+         
+          </ng-template>

@@ -1,163 +1,26 @@
 <div *ngIf="existe===true" class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        
-                            <h5>Medidas</h5>
-                            <div class="row">
-                                 <div class="col-md-6">
-                                 <h6 align="center" class="text-info">Abdomen (cm)</h6>
-                                     <div class="row">
-                                         <div class="col-md-4">
-                                             <div class="form-group">
-                                                     <label class="control-label">Inicial</label>
-                                                     <input [(ngModel)]="exp.abdomen" disabled name="abdomen" type="number" min="0" required  class="form-control" >
-                                             </div>
-                                         </div>
-                                         <div class="col-md-4">
-                                                 <div class="form-group">
-                                                         <label class="control-label">Actual</label>
-                                                         <input [(ngModel)]="exp.abdomenA" disabled name="abdomenA" type="number" min="0"(blur)="abdomen()" required class="form-control" >
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-4">
-                                                     <div class="form-group">
-                                                             <label class="control-label">Bajado</label>
-                                                             <input [(ngModel)]="exp.abdomenB" disabled name="abdomenB"type="number"min="0" disabled class="form-control" >
-                                                     </div>
-                                                 </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                         <h6 align="center" class="text-primary">Cintura (cm)</h6>
-                                             <div class="row">
-                                                 <div class="col-md-4">
-                                                     <div class="form-group">
-                                                             <label class="control-label">Inicial</label>
-                                                             <input [(ngModel)]="exp.cintura" disabled name="cintura"type="number"min="0" required class="form-control" >
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-4">
-                                                         <div class="form-group">
-                                                                 <label class="control-label">Actual</label>
-                                                                 <input [(ngModel)]="exp.cinturaA" disabled name="cinturaA" (blur)="cintura()" required type="number"min="0"  class="form-control" >
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-4">
-                                                             <div class="form-group">
-                                                                     <label class="control-label">Bajado</label>
-                                                                     <input [(ngModel)]="exp.cinturaB" disabled name="cinturaB"type="number"min="0" disabled class="form-control" >
-                                                             </div>
-                                                         </div>
-                                             </div>
-                                 </div>
-                            </div>
-                            <div class="row">
-                                 <div class="col-md-6">
-                                 <h6 align="center" class="text-danger">Peso (kg)</h6>
-                                     <div class="row">
-                                         <div class="col-md-4">
-                                             <div class="form-group">
-                                                     <label class="control-label">Inicial</label>
-                                                     <input [(ngModel)]="exp.peso" disabled name="peso"type="number" min="0"required  class="form-control" >
-                                             </div>
-                                         </div>
-                                         <div class="col-md-4">
-                                                 <div class="form-group">
-                                                         <label class="control-label">Actual</label>
-                                                         <input [(ngModel)]="exp.pesoA" disabled name="pesoA" (blur)="peso()"type="number"min="0" required class="form-control" >
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-4">
-                                                     <div class="form-group">
-                                                             <label class="control-label">Bajado</label>
-                                                             <input [(ngModel)]="exp.pesoB" disabled name="pesoB"type="number"min="0" disabled class="form-control" >
-                                                     </div>
-                                                 </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                         <h6 align="center" class="text-warning">% Grasa corporal</h6>
-                                             <div class="row">
-                                                 <div class="col-md-4">
-                                                     <div class="form-group">
-                                                             <label class="control-label">Inicial</label>
-                                                             <input [(ngModel)]="exp.grasacorporal" disabled name="grasacorporal"type="number" min="0"required class="form-control" >
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-4">
-                                                         <div class="form-group">
-                                                                 <label class="control-label">Actual</label>
-                                                                 <input [(ngModel)]="exp.grasacorporalA" disabled (blur)="grasacorporal()" min="0" required name="grasacorporalA"type="number"  class="form-control" >
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-4">
-                                                             <div class="form-group">
-                                                                     <label class="control-label">Bajado</label>
-                                                                     <input [(ngModel)]="exp.grasacorporalB" disabled name="grasacorporalB" type="number" disabled class="form-control" >
-                                                             </div>
-                                                         </div>
-                                             </div>
-                                 </div>
-                            </div>
-                            <div class="row">
-                                 <div class="col-md-6">
-                                         <h6 align="center" class="text-success">% Grasa Viceral</h6>
-                                             <div class="row">
-                                                 <div class="col-md-4">
-                                                     <div class="form-group">
-                                                             <label class="control-label">Inicial</label>
-                                                             <input [(ngModel)]="exp.grasaviceral" disabled name="grasaviceral"type="number"min="0"  required class="form-control" >
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-4">
-                                                         <div class="form-group">
-                                                                 <label class="control-label">Actual</label>
-                                                                 <input [(ngModel)]="exp.grasaviceralA" disabled (blur)="grasaviceral()" required min="0" name="grasaviceralA"type="number"  class="form-control" >
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-4">
-                                                             <div class="form-group">
-                                                                     <label class="control-label">Bajado</label>
-                                                                     <input [(ngModel)]="exp.grasaviceralB" disabled name="grasaviceralB"type="number" min="0" disabled class="form-control" >
-                                                             </div>
-                                                         </div>
-                                             </div>
-                                         </div>
-                                 <div class="col-md-6">
-                                 
-                                         <div class="form-group">
-                                             <br>
-                                                 <label class="control-label">Estatura (metros)</label>
-                                                 <input [(ngModel)]="exp.estatura" name="estatura" disabled type="text"  required class="form-control" >
-                                         </div>
-                                 </div>
-                            </div>
-                            <div class="row">
-                                 <div class="col-md-2">
-                                         
-                                             <div class="form-group">
-                                                <label>IMC</label>
-                                                             <input [(ngModel)]="exp.imc" name="imc" disabled type="number" min="0" required class="form-control" >
-                                         
-                                                            
-                                             </div>
-                                         
-                                 </div>
-                        
-                                 <div class="col-md-4">
-                                 
-                                         <div class="form-group">
-                                                     <label class="control-label">Diagnostico de acuerdo a IMC</label>
-                                                     <input [(ngModel)]="exp.diagnostico" name="diagnostico" disabled type="text"  required class="form-control" >
-                                             </div>
-                                 </div>
-                            </div>
-                            
-                         
-                    </div>
-                </div>
-            </div>
+          
+                       <div  class="col-12">
+                           <div  class="card">
+                                        <div *ngIf="mostrargrafica===false" class="alert alert-info">
+                                                        Tu nutriologo aun no registra tus medidas!!
+                                                    </div>   
+                                        <div *ngIf="mostrargrafica===true" class="chart"style = "display:block; width:100%;" > 
+                                                        <canvas baseChart
+                                                        [datasets]="barChartData"
+                                                        [labels]="barChartLabels"
+                                                        [colors] = "chartColors" 
+                                                        [options]="barChartOptions"
+                                                        [legend]="barChartLegend"
+                                                        [chartType]="barChartType"
+                                                        (chartHover)="chartHovered($event)"
+                                                        (chartClick)="chartClicked($event)">
+                                              </canvas>
+                                           </div>
+                           </div>
+                       </div>
+                 
+                 
         </div>
 <div *ngIf="existe===false" class="row">
         <div class="alert alert-info">

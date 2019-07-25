@@ -1,7 +1,7 @@
 <!--<a (click)="loadevents()"> loadevents</a>
 <p>Display event : {{displayEvent | json}}</p>-->
 <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3">
       <div class="card">
           <div class="card-body">
             <h3>Nueva cita</h3>
@@ -40,7 +40,7 @@
           </div>
       </div>
       </div>
-            <div class="col-9">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
                         <div *ngIf="calendarOptions">
@@ -54,121 +54,182 @@
                 </div>
             </div>
         </div>
-
-        <ng-template #editar let-modal>
+        <ng-template #buscar let-modal>
             <div class="modal-header">
-              <h4 class="modal-title">Editar Cita</h4>
-              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <h4 class="modal-title">Buscar Paciente</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cancelar()">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form #editarCita="ngForm" ngNativeValidate (ngSubmit)="editarC(editarCita)">
-             
+                
             <div class="modal-body">
-              
-                     <div class="form-group">
-                        <label>Titulo:</label>
-                        <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
-                    
-                   </div>
-                    <div class="form-group">
-                    <label>Paciente:</label>
-                    <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select" required>
-                        <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
-                       
-                        
-                    </select>
-                    </div>
-                  <div class="form-group">
-                     <label>Fecha:</label>
-                    <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
-                       
-                   </div>
-                 <div class="form-group">
-                  <label>Hora (formato 24hrs):</label>
-                  <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
-              
-            </div>  
-            <div class="row">
-              <div class="col-md-3" >
-                  <label>Estatus:</label>
+                <input #input (keyup)="buscarPaciente( input.value)" type="text" class="form-control" placeholder="buscar.."><br><br>
+                <div *ngIf="alert===true" class="alert alert-success">
+                    Paciente Seleccionado <i class="fa fa-check"></i>
                 </div>
-                <div class="col-md-9" >
-                    <select *ngIf="cita.estatus==='0'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
-                        <option class="text-danger" value="0"> Cancelada</option>
-                        <option class="text-warning" value="2"> Pendiente</option>
+                <div id="busquedapaciente">
+                    <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th hidden="hidden">Id</th>
+                                    <th>Nombre</th>
+                                    <th>Ap. Paterno</th>
+                                    <th>Ap. Materno</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of pacientes">
+                                    <td hidden="hidden">{{p._id}}</td>
+                               
+                                    <td>{{p.nombre}}</td>
+                                    <td>{{p.app}}</td>
+                                    <td>{{p.apm}}</td>
+                                   
+                                    <td>
+                                            <button id="botonsito" (click)="seleccionar(p,buscar)" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                           
+                                          
+                                                
+                                                  
+        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+         
+          </ng-template>
+        <ng-template #editar let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">Editar Cita</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form #editarCita="ngForm" ngNativeValidate >
+                 
+                <div class="modal-body">
+                  
+                         <div class="form-group">
+                            <label>Titulo:</label>
+                            <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
                         
-                        
-                    </select>
-                    <select *ngIf="cita.estatus==='1'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
-                                  
-                        <option class="text-success" value="1"> Realizada</option>
-                          
+                       </div>
+                        <div class="form-group">
+                        <label>Paciente:</label>
+                                <div class="input-group">
+                                    <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select"  required>
+                                        <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
+                                    
+                                        
+                                    </select>
+                                    <button class="btn btn-info" (click)="modalbuscar(buscar)"><i class="fa fa-search"></i></button>
+                                </div>    
+                        </div>
+                      <div class="form-group">
+                         <label>Fecha:</label>
+                        <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
+                           
+                       </div>
+                     <div class="form-group">
+                      <label>Hora (formato 24hrs):</label>
+                      <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
+                  
+                </div>  
+                <div class="row">
+                  <div class="col-md-3" >
+                      <label>Estatus:</label>
+                    </div>
+                    <div class="col-md-9" >
+                        <select *ngIf="cita.estatus==='0'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                            <option  class="text-danger" value="0"> Cancelada</option>
+                            <option class="text-warning" value="2"> Pendiente</option>
+                            
                             
                         </select>
-                        <select *ngIf="cita.estatus==='2'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
-                                <option class="text-danger" value="0"> Cancelada</option>
-                                <option class="text-warning" value="2"> Pendiente</option>
-                                    
-                               <option class="text-success" value="1"> Realizada</option>
+                        <select *ngIf="cita.estatus==='1'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                                      
+                            <option class="text-success" value="1"> Realizada</option>
                               
                                 
                             </select>
-                        
-                  </div>
-              </div>
-            <br>
-                              </div>
-            <div class="modal-footer">
-                <button type ="submit" class="btn  btn-success mb-2 mr-2" >Guardar</button>
-           
-              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-            </div>
-          </form>  
-          </ng-template>
-
-          <ng-template #nueva let-modal>
-              <div class="modal-header">
-                <h4 class="modal-title">Nueva Cita</h4>
-                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form #nuevaCita="ngForm" ngNativeValidate (ngSubmit)="nuevaC(editarCita)">
-               
-              <div class="modal-body">
-                
-                       <div class="form-group">
-                          <label>Titulo:</label>
-                          <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
-                      
-                     </div>
-                      <div class="form-group">
-                      <label>Paciente:</label>
-                      <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select" required>
-                          <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
-                         
-                          
-                      </select>
+                            <select *ngIf="cita.estatus==='2'"[(ngModel)]="cita.estatus" name="estatus" class="form-control custom-select" required>
+                                    <option class="text-danger" value="0"> Cancelada</option>
+                                    <option class="text-warning" value="2"> Pendiente</option>
+                                        
+                                   <option class="text-success" value="1"> Realizada</option>
+                                  
+                                    
+                                </select>
+                            
                       </div>
-                    <div class="form-group">
-                       <label>Fecha:</label>
-                      <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
-                         
-                     </div>
-                   <div class="form-group">
-                    <label>Hora (formato 24hrs):</label>
-                    <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
-                
-              </div>  
-              
-             
-                                </div>
-              <div class="modal-footer">
-                  <button type ="submit" class="btn  btn-success mb-2 mr-2" >Guardar</button>
-             
-                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-              </div>
-            </form>  
-            </ng-template>
+                  </div>
+                <br>
+                                  </div>
+                <div class="modal-footer">
+                    <button (click)="editarC(editarCita)"class="btn  btn-success mb-2 mr-2" >Guardar</button>
+               
+                  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                </div>
+              </form>  
+              </ng-template>
+    
+              <ng-template #nueva let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title">Nueva Cita</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form #nuevaCita="ngForm" ngNativeValidate (ngSubmit)="nuevaC(editarCita)">
+                   
+                  <div class="modal-body">
+                      <label>AQUI</label>
+                      <select class="form-control selectpicker" data-live-search="true" >
+                                <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                                <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                                <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                              </select>
+                              
+                           <div class="form-group">
+                              <label>Titulo:</label>
+                              <input  [(ngModel)]="cita.title" name="title"type="text" class="form-control" required>
+                          
+                         </div>
+                          <div class="form-group">
+                          <label>Paciente:</label>
+                          <div class="input-group">
+                                <select [(ngModel)]="cita.paciente" name="paciente" class="form-control custom-select"  required>
+                                    <option *ngFor="let p of pacientes" value="{{p._id}}">{{p.nombre}} {{p.app}} {{p.apm}}</option>
+                                
+                                    
+                                </select>
+                                <button class="btn btn-info" (click)="modalbuscar(buscar)"><i class="fa fa-search"></i></button>
+                            </div>  
+                          </div>
+                        <div class="form-group">
+                           <label>Fecha:</label>
+                          <input  type="date"[(ngModel)]="cita.start" name="start" class="form-control"  placeholder="dd/mm/aaaa" min="2018-01-01" required>
+                             
+                         </div>
+                       <div class="form-group">
+                        <label>Hora (formato 24hrs):</label>
+                        <input type="time"[(ngModel)]="cita.time" name=time class="form-control" min="08:00" max="21:00" required>
+                    
+                  </div>  
+                  
+                 
+                                    </div>
+                  <div class="modal-footer">
+                      <button type ="submit" class="btn  btn-success mb-2 mr-2" >Guardar</button>
+                 
+                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                  </div>
+                </form>  
+                </ng-template>      
          

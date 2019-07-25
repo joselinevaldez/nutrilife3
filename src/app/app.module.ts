@@ -8,6 +8,7 @@ import { APP_ROUTES } from './app.routes';
 import { PagesModule } from './pages/pages.module';
 // temporal
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +34,8 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     ServiceModule,
     NgbModule,
-    CommonModule
+    CommonModule,
+    NgSelectModule
   
     
 

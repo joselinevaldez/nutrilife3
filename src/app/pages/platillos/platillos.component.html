@@ -72,11 +72,14 @@
                                 </div>
                             <div class="form-group row">
                                 <label class="control-label">Alimento</label>
-                                <select  id="alimento" name="alimento" class="form-control custom-select" >
-                                    <option  *ngFor="let a of alimentos"  value={{a._id}},{{a.unidad}} >{{a.nombre}}</option>
-                                    
-                                    
-                                </select>
+                                <div class="input-group">
+                                    <select  id="alimento" name="alimento" value="{{alimento}}" class="form-control custom-select" >
+                                        <option  *ngFor="let a of alimentos"  value={{a._id}},{{a.unidad}} >{{a.nombre}}</option>
+                                        
+                                        
+                                    </select>
+                                    <button class="btn btn-info" (click)="modalbuscar(buscar)"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
                             <div class="row">
                                 <div class="form-group row">
@@ -152,3 +155,57 @@
 </div>    
 
 
+<ng-template #buscar let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Buscar Alimento</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cancelar()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            
+        <div *ngIf="mostrar===true" class="modal-body">
+                <input #input (keyup)="buscarAlimento (input.value)" type="text" class="form-control" placeholder="Buscar ..."><br><br>
+            <div *ngIf="alert===true" class="alert alert-success">
+                Alimento seleccionado <i class="fa fa-check"></i>
+            </div>
+            <div id="busquedapaciente">
+                <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th hidden="hidden">Id</th>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                               
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of alimentos">
+                                <td hidden="hidden">{{a._id}}</td>
+                           
+                                <td>{{a.nombre}}</td>
+                                <td>{{a.grupo}}</td>
+                                                              
+                                <td>
+                                        <button id="botonsito" (click)="seleccionar(a,buscar)" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                       
+                                      
+                                            
+                                              
+    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        <div *ngIf="mostrar===false" class="modal-body">
+            <div class="alert alert-info">
+                Aun no registras alimentos de esta categoria..
+            </div>
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+     
+      </ng-template>
